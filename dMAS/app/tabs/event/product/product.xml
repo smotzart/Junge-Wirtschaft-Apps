@@ -1,0 +1,22 @@
+<GridLayout rows="*" xmlns:Card="nativescript-cardview" loaded="onTabLoaded" unloaded="onTabUnloaded">
+    <ListView items="{{ products }}" row="0" separatorColor="transparent" >
+        <ListView.itemTemplate>
+            <StackLayout>
+                <StackLayout marginTop="20" verticalAlignment="center" height="40" cssClass="card-separate-head">
+                    <label text="{{ cat_name }}" cssClass="theme-color" />
+                </StackLayout>                
+                <Repeater items="{{ values }}">
+                    <Repeater.itemsLayout>
+                      <WrapLayout />
+                    </Repeater.itemsLayout>
+                    <Repeater.itemTemplate>
+                        <GridLayout rows="44" columns="*" verticalAlignment="center">
+                            <label row="0" col="0" text="{{ $value }}" cssClass="productListItem" />
+                        </GridLayout>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </StackLayout>
+        </ListView.itemTemplate>
+    </ListView>
+    <ActivityIndicator  busy="{{ isLoading }}" />
+</GridLayout>

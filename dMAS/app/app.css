@@ -1,11 +1,11 @@
 .km-icon {
-    font-family: 'kendoui';
+    font-family: 'SourceSansPro-Regular';
     vertical-align: center;
     horizontal-align: center;
 }
 
 page {
-    background-color: #fff;
+    background-color: #f4f4f4;
 }
 
 button {
@@ -103,15 +103,18 @@ switch {
 }
 
 .h1 {
-    font-size: 32;
+    font-size: 26;
+    font-family: 'SourceSansPro-Light';
 }
 
 .h2 {
-    font-size: 26;
+    font-size: 22;
+    font-family: 'SourceSansPro-Light';
 }
 
 .h3 {
-    font-size: 20;
+    font-size: 18;
+    font-family: 'SourceSansPro-Light';
 }
 
 .h4 {
@@ -146,7 +149,15 @@ switch {
     horizontal-align: right;
 }
 
+ActionBar {
+    background-color:  #df142f;
+    color: white;
+    font-size: 20;
+}
 
+.fa {
+    font-family: "fontawesome-webfont";
+}
 /* START_CUSTOM_CODE_nativeScriptApp */
 
 
@@ -154,3 +165,310 @@ switch {
 
 
 /* END_CUSTOM_CODE_nativeScriptApp */
+
+.detailSubhead {
+    color: #4a4a4a;
+    font-size: 20;
+}
+
+.detailCard {
+    background-color: #fff;
+}
+
+.detailCard .fa {
+    color: #d0021b;
+    font-size: 16;
+    margin-right: 12;
+}
+
+.detailData {
+    color: #5d5d5d;
+    font-size: 17;
+}
+
+.detailCardTitle {
+    font-size: 14;
+    color: #d0021b;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.detailCardText {
+    font-size: 16;
+    color: #4a4a4a;
+}
+
+.detailCardText.address {
+    font-size: 17;
+}
+
+.btn {
+    border-radius: 3;
+    background-color: #d0021b;
+    font-family: 'SourceSansPro-Semibold';
+    color: #fff;
+    font-size: 16;
+}
+
+.datailCardBtnWrap {
+    border-radius: 3;
+    background-color: #d0021b;
+}
+
+.detailCardBtn {
+    color: #fff;
+    font-size: 16;
+    width: 100%;
+}
+
+.detailCardBtn .fa {
+    margin-right: 10;
+}
+
+.detailCardBtnText {
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.detailSubhead {
+    color: #4a4a4a;
+    font-size: 20;
+}
+
+.infoCard {
+    background-color: #fff;
+}
+
+.infoCardHead {
+    color: #5d5d5d;
+    font-size: 26;
+    font-family: 'SourceSansPro-Light';
+}
+
+.infoCardSubhead {
+    color: #5d5d5d;
+    font-size: 18;
+    font-family: 'SourceSansPro-Light';
+    margin: 0 0 10 0;
+}
+
+.infoCard .fa {
+    color: #d0021b;
+    font-size: 16;
+    margin-right: 12;
+}
+
+.infoCardTitle {
+    font-size: 14;
+    color: #d0021b;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.infoCardText {
+    font-size: 16;
+    color: #4a4a4a;
+}
+
+.infoCardLabel,
+.infoCardText.address {
+    font-size: 17;
+}
+
+.cardStyle {
+    background-color: #fff;
+    margin: 0 -4 10 -4;
+}
+
+.cardStyle GridLayout {
+    padding: 11 13 11 13;
+}
+
+.cardStyle .fa {
+    font-size: 14;
+    color: #d0021b;
+    margin-right: 6;
+}
+
+.cardDate,
+.cardLabel {
+    color: #0d5775;
+    font-size: 13;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.cardTitle {
+    color: #5d5d5d;
+    font-size: 22;
+    font-family: 'SourceSansPro-Light';
+}
+
+.cardSubtitle {
+    color: #5d5d5d;
+    font-size: 14;
+    font-family: 'SourceSansPro-Regular';
+}
+
+.cardHr {
+    margin: 7 0 7 0;
+    height: 1;
+    background-color: #eeefee;
+}
+
+.cardGroupTitle {
+    color: #4a4a4a;
+    letter-spacing: 2;
+    padding-left: 10;
+    font-size: 12;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.cardImage {
+    margin: 0 0 12 0;
+}
+.productListHead {
+    font-size: 14;
+    color: #d0021b;
+    padding: 0 10 0 10;
+    font-family: 'SourceSansPro-Semibold';
+    text-transform: uppercase;
+}
+
+.productListItem {
+    font-size: 17;
+    padding: 0 15 0 15;
+}
+.programStyle  {
+    background-color: #fff;
+}
+
+.programGroupTitle {
+    color: #d0021b;
+    font-family: 'SourceSansPro-Semibold';
+    font-size: 14;
+    padding-left: 18;
+}
+
+.programTimeFrom {
+    color: #d0021b;
+    font-family: 'SourceSansPro-Semibold';
+    font-size: 18;
+}
+
+.programTimeTo {
+    font-size: 13;
+    color: #5d5d5d;
+}
+
+.programText {
+    font-size: 18;
+    color: #5d5d5d;
+    padding-right: 10;
+}
+.programSubtext {
+    font-size: 16;
+    margin-top: 10;
+    color: #5d5d5d;
+    padding-right: 10;
+}
+
+.programLabelWrap {
+    background-color: #f8f8f8;
+}
+
+.programLabel {
+    font-size: 14;
+    color: #0d5775;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.programLabel .fa {
+    color: #d0021b;
+    font-size: 16;
+    margin-right: 6;
+}
+
+.traderCard {
+    background-color: #fff;
+}
+
+.traderCardHeader {
+    color: #5d5d5d;
+    font-size: 26;
+    font-family: 'SourceSansPro-Light';
+}
+.traderCardLabelWrap {
+    background-color: #f8f8f8;
+    padding-left: 15;
+}
+.traderCardLabel {
+    font-size: 14;
+    color: #0d5775;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.traderCardLabel .fa {
+    color: #d0021b;
+    font-size: 16;
+    margin-right: 10;
+}
+
+.traderCardTitle {
+    font-size: 14;
+    color: #d0021b;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.traderCardText {
+    font-size: 16;
+    color: #4a4a4a;
+}
+
+.traderCardText.address {
+    font-size: 17;
+}
+
+.traderStyle {
+    background-color: #fff;
+    margin: 0 10 15 10;
+}
+
+.traderName {
+    color: #4a4a4a;
+    font-size: 18;
+}
+
+.traderLabel {
+    font-size: 13;
+    color: #fff;
+    background-color: #f29100;
+    padding: 0 5 0 5;
+}
+.traderLabel.feature {
+    background-color: #51bab4;
+}
+.traderLabel.hot {
+    background-color: #d60b51;
+}
+.traderFooterWrap {
+    background-color: #f8f8f8;
+    padding: 0 17 0 17;
+}
+.traderFooter {
+    color: #0d5775;
+    font-size: 14;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+.traderFooter .fa {
+    font-size: 16;
+    color: #d0021b;
+    margin-right: 5;
+}
+
+
+.traderGroupTitle {
+    color: #5d5d5d;
+    padding-left: 10;
+    font-size: 15;
+    font-family: 'SourceSansPro-Semibold';
+}
+
+@import url('~/test.css');

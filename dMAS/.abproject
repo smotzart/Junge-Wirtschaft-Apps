@@ -6,8 +6,8 @@
   "DisplayName": "dMAS",
   "Author": "",
   "Description": "dMAS",
-  "BundleVersion": "1.0",
-  "AndroidVersionCode": "1",
+  "BundleVersion": "2.0",
+  "AndroidVersionCode": "2",
   "iOSDeviceFamily": [
     "1",
     "2"
@@ -18,8 +18,7 @@
     "android.permission.INTERNET"
   ],
   "DeviceOrientations": [
-    "Portrait",
-    "Landscape"
+    "Portrait"
   ],
   "AndroidHardwareAcceleration": "true",
   "iOSStatusBarStyle": "Default",

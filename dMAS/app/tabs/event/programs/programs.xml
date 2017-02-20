@@ -1,0 +1,49 @@
+<GridLayout rows="*" xmlns:Card="nativescript-cardview" loaded="onTabLoaded" unloaded="onTabUnloaded">
+    <ListView items="{{ event_actions }}" row="1" separatorColor="transparent" >
+        <ListView.itemTemplate>   
+            <StackLayout>
+                <StackLayout marginTop="20" verticalAlignment="center" height="40" cssClass="card-separate-head">
+                    <label text="{{ day_name | uppercase() }}" cssClass="theme-color" />
+                </StackLayout>
+                <Repeater items="{{ list }}">
+                    <Repeater.itemsLayout>
+                      <WrapLayout />
+                    </Repeater.itemsLayout>
+                    <Repeater.itemTemplate>
+                        <Card:CardView cssClass="card card-program" elevation="7" radius="3" tap="goToProgram">
+                            <GridLayout margin="0" rows="auto, auto" columns="*">
+                                <GridLayout margin="0" row="0" rows="*" columns="70, *, 20" padding="10">
+                                    <StackLayout row="0" col="0" verticalAlignment="top">
+                                        <label cssClass="time-from" text="{{ time_from }}" />
+                                        <label cssClass="time-to" text="{{ 'bis ' + time_to }}" />
+                                    </StackLayout>
+                                    <StackLayout row="0" col="1" verticalAlignment="top">
+                                        <label cssClass="text" text="{{ $value.action.title }}" textWrap="true" visibility="{{ $value.action.title ? 'visible' : 'collapsed' }}" />
+                                        <label cssClass="text text-descr" text="{{ $value.action.description }}" textWrap="true" visibility="{{ $value.action.title ? 'collapsed' : 'visible' }}" />
+                                    </StackLayout>
+                                    <StackLayout row="0" col="2" verticalAlignment="top">
+                                        <Repeater items="{{ $value.action.languages }}">
+                                            <Repeater.itemTemplate>
+                                                <StackLayout height="12" width="12" marginTop="2" marginBottom="2"> 
+                                                    <image src="{{ '~/images/flags/' + $value + '.png' }}" stretch="aspectFill" cssClass="flag-image" />
+                                                </StackLayout>
+                                            </Repeater.itemTemplate>
+                                        </Repeater>                            
+                                    </StackLayout>  
+                                </GridLayout>
+                                <GridLayout margin="0" row="1" rows="39" columns="58, *" cssClass="card-footer" visibility="{{ ($value.action.location && $value.action.location != '') ? 'visible' : 'collapsed' }}">
+                                    <StackLayout height="39" row="0" col="0"></StackLayout>
+                                    <StackLayout height="39" row="0" col="1" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
+                                        <label text="&#xf02b;" cssClass="fa" />
+                                        <label text="{{ $value.action.location }}" />
+                                    </StackLayout>
+                                </GridLayout>
+                            </GridLayout>
+                        </Card:CardView>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </StackLayout>
+        </ListView.itemTemplate>
+    </ListView>
+    <ActivityIndicator busy="{{ isLoading }}" row="1" />
+</GridLayout>

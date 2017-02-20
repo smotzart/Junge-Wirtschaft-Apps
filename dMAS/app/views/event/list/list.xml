@@ -1,0 +1,35 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" loaded="onPageLoaded" actionBarHidden="true">
+    <GridLayout rows="50, *">
+        <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
+            <StackLayout col="1" verticalAlignment="center">
+                <Label text="Messen" horizontalAlignment="center" />
+            </StackLayout>
+        </GridLayout>
+        <StackLayout row="1">
+            <TabView tabsBackgroundColor="#ffffff" selectedColor="#d0021b">
+                <TabView.items>
+                    <TabViewItem title="Alle" xmlns:AllTab="tabs/list/all">
+                        <TabViewItem.view>
+                            <AllTab:all />
+                        </TabViewItem.view>
+                    </TabViewItem>
+                    <TabViewItem title="Publikumsmessen" xmlns:PublicTab="tabs/list/public">
+                        <TabViewItem.view>
+                            <PublicTab:public />
+                        </TabViewItem.view>
+                    </TabViewItem>
+                    <TabViewItem title="Fachmessen" xmlns:TraderTab="tabs/list/trade">
+                        <TabViewItem.view>
+                            <TraderTab:trade />
+                        </TabViewItem.view>
+                    </TabViewItem>
+                    <TabViewItem title="Kongresse" xmlns:ConfTab="tabs/list/conf">
+                        <TabViewItem.view>
+                            <ConfTab:conf />
+                        </TabViewItem.view>
+                    </TabViewItem>
+                </TabView.items>
+            </TabView>
+        </StackLayout>
+    </GridLayout>
+</Page>

@@ -1,0 +1,70 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview" navigatingTo="navigatingTo" actionBarHidden="true">
+    <GridLayout rows="50, *">
+        <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
+            <StackLayout col="0" verticalAlignment="center">
+                <Button text="&#xf053;" cssClass="fa" tap="goBack" />
+            </StackLayout>
+            <StackLayout col="1" verticalAlignment="center">
+                <Label text="{{ eventName }}" horizontalAlignment="center" />
+            </StackLayout>
+        </GridLayout>
+        <StackLayout row="1">
+            <ScrollView>
+                <StackLayout>
+                    <Card:CardView cssClass="card card-header" elevation="7" radius="1">
+                        <GridLayout rows="*, auto" columns="*">
+                            <GridLayout row="0" rows="*" columns="*, 100" padding="35 22 20 22">
+                                <StackLayout col="0" verticalAlignment="center">
+                                    <label text="{{ model.trader.user.company }}" textWrap="true" cssClass="h1" />
+                                </StackLayout>
+                                <StackLayout col="1">
+                                    <image src="{{ model.trader.user.image_url }}" stretch="aspectFit" />
+                                </StackLayout>                        
+                            </GridLayout>
+                            <StackLayout row="1" cssClass="card-footer" visibility="{{ model.trader.stand ? 'visible' : 'collapsed' }}">
+                                <StackLayout height="39" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
+                                    <label text="&#xf041;" cssClass="fa" />
+                                    <label text="{{ model.trader.stand }}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </Card:CardView>
+                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.products ? 'visible' : 'collapsed' }}">
+                        <GridLayout rows="25, *" columns="*">
+                        <Label row="0" cssClass="card-title" text="PRODUKTE" />
+                        <StackLayout row="1" cssClass="card-body">
+                                <Label cssClass="last" textWrap="true" text="{{ model.trader.products }}" />
+                        </StackLayout>
+                        </GridLayout>
+                    </Card:CardView>
+                    <Card:CardView cssClass="card card-text" elevation="7" radius="3">
+                        <GridLayout rows="25, *" columns="*">
+                            <Label row="0" cssClass="card-title" text="ADRESSE" />
+                            <StackLayout row="1" cssClass="card-body card-body-address">
+                                <Label textWrap="true" text="{{ model.trader.user.address }}" visibility="{{ model.trader.user.address ? 'visible' : 'collapsed' }}" />
+                                <Label textWrap="true" text="{{ model.trader.user.zip + ' ' + model.trader.user.city }}" />
+                                <Label textWrap="true" text="{{ model.trader.user.country | countryName() }}" visibility="{{ model.trader.user.country ? 'visible' : 'collapsed' }}" />
+                            </StackLayout>
+                        </GridLayout>
+                    </Card:CardView>
+                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.user.website ? 'visible' : 'collapsed' }}" tap="visitWebsite">
+                        <GridLayout rows="25, *" columns="*">
+                          <Label row="0" cssClass="card-title" text="WEBSITE" />
+                            <StackLayout row="1" cssClass="card-body card-body-address">
+                                <Label textWrap="true" height="23" text="{{ model.trader.user.website }}" />
+                            </StackLayout>
+                        </GridLayout>
+                    </Card:CardView>
+                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.user.email ? 'visible' : 'collapsed' }}" tap="sendEmail">
+                        <GridLayout rows="25, *" columns="*">
+                        <Label row="0" cssClass="card-title" text="E-MAIL" />
+                            <StackLayout row="1" cssClass="card-body card-body-address">
+                                <Label textWrap="true" height="23" text="{{ model.trader.user.email }}" />
+                            </StackLayout>
+                        </GridLayout>
+                    </Card:CardView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </GridLayout>
+</Page>

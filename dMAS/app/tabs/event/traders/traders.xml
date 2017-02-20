@@ -1,0 +1,36 @@
+<GridLayout rows="*" xmlns:Card="nativescript-cardview" loaded="onTabLoaded" unloaded="onTabUnloaded">
+    <ScrollView row="0">
+        <GridLayout paddingTop="15" rows="40, *">
+            <StackLayout row="0" verticalAlignment="center" height="40" cssClass="card-separate-head" visibility="{{ exhibitorsCount ? 'visible' : 'collapsed' }}">
+                <label text="{{ exhibitorsCount + ' AUSSTELLER' }}" />
+            </StackLayout>
+
+            <Repeater items="{{ exhibitors }}" row="1" separatorColor="transparent" >
+                <Repeater.itemTemplate>
+                    <Card:CardView cssClass="card" elevation="7" radius="3" tap="goToTrader">
+                        <GridLayout margin="0" rows="auto, auto, auto" columns="*">
+                            <StackLayout height="18" row="0" orientation="vertical" horizontalAlignment="left" cssClass="{{ 'card-trader-label ' + trader.tag }}" visibility="{{ trader.tag ? 'visible' : 'collapsed' }}">
+                                <label height="18" text="{{ trader.tag | uppercase() }}" />
+                            </StackLayout>
+                            <GridLayout margin="0" row="1" rows="*" columns="*, 100" padding="10 10 10 20">
+                                <StackLayout col="0" cssClass="card-body-large" verticalAlignment="center">
+                                    <label text="{{ trader.user.company }}" textWrap="true" />
+                                </StackLayout>
+                                <StackLayout col="1" verticalAlignment="center" visibility="{{ trader.user.image_url ? 'visible' : 'collapsed' }}">
+                                    <image src="{{ trader.user.image_url }}" verticalAlignment="center" stretch="aspectFit" />
+                                </StackLayout>
+                            </GridLayout>
+                            <StackLayout row="2" cssClass="card-footer" visibility="{{ trader.stand ? 'visible' : 'collapsed' }}">
+                                <StackLayout height="39" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
+                                    <label text="&#xf041;" cssClass="fa" />
+                                    <label text="{{ trader.stand }}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </Card:CardView>
+                </Repeater.itemTemplate>
+            </Repeater>
+        </GridLayout>
+    </ScrollView>
+    <ActivityIndicator busy="{{ isLoading }}" row="0" />
+</GridLayout>

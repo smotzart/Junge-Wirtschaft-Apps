@@ -1,0 +1,2 @@
+<StackLayout id="test" loaded="onTabLoaded" unloaded="onTabUnloaded">
+</StackLayout>

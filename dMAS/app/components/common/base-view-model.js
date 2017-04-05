@@ -42,6 +42,14 @@ var BaseViewModel = (function (_super) {
             }
         }
     };
+    BaseViewModel.prototype.waitLoading = function () {
+        if (this._loadingCount > 0) {
+            this._loadingCount--;
+            if (!this._loadingCount) {
+                this.isLoading = false;
+            }
+        }
+    };
     BaseViewModel.prototype.showError = function (error) {
         dialogsModule.alert({ title: "Error", message: error, okButtonText: "Close" });
     };

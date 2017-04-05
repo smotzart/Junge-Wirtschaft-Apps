@@ -1,49 +1,32 @@
 "use strict";
 
-var tabView     = require("ui/tab-view");
-var Nav         = require("~/utils/navigation/navigation");
-var viewsModule = require("~/utils/views/views");
+var closeTimeout2 = 0;
 
-var THIS_TAB_IDX = 5;
-var thisTab;
-var thisContent;
-
-function onTabLoaded(args) {    
-  thisTab = args.object;
-  thisTab.parent.on(tabView.TabView.selectedIndexChangedEvent, onTabChange);
-  thisContent = thisTab.page.bindingContext;
-  thisTab.bindingContext = thisContent;
-}
-exports.onTabLoaded = onTabLoaded;
-
-function onTabUnloaded(args) {
-    thisTab.parent.off(tabView.TabView.selectedIndexChangedEvent, onTabChange);
-    thisTab = null;
-}
-exports.onTabUnloaded = onTabUnloaded;
-
-function loadActions() {
-  if (typeof(thisContent.actionsCount) != 'undefined') {
-    return;
+function inputTap2 (args) {
+  if (closeTimeout2) {
+    clearTimeout(closeTimeout2);
   }
-  setTimeout(function() {
-    thisContent.loadActions();
-  }, 200);  
+  closeTimeout2 = setTimeout(() => {
+    closeTimeout2 = 0;
+  }, 20);
 }
+exports.inputTap2 = inputTap2;
 
-function onTabChange(args) {
-  if (args.newIndex === THIS_TAB_IDX) {
-      loadActions();
+function tap2 (args) {
+  var page = args.object.page;
+  if (!closeTimeout2) {
+    closeTimeout2 = setTimeout(() => {
+      page.getViewById("search2").dismissSoftInput();
+      closeTimeout2 = 0;
+    }, 20);
   }
 }
+exports.tap2 = tap2;
 
-function goToProgram(args) {
-  Nav.navigate({
-    moduleName: viewsModule.Views.programView,
-    context: {
-      model: args.view.bindingContext,
-      eventName: thisContent.event.name
-    }
-  });
+function doNotShowAndroidKeyboard(args) {
+  var searchBar = args.object;
+  if (searchBar.android) {
+    searchBar.android.clearFocus();
+  }
 }
-exports.goToProgram = goToProgram;
+exports.doNotShowAndroidKeyboard = doNotShowAndroidKeyboard;

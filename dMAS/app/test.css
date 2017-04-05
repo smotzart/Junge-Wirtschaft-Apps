@@ -16,10 +16,13 @@
 .flag-image {
     border-radius: 20;
 }
-.card-event > * {
+.card-event .inner {
     padding: 10 15;
 }
 
+.card-event > * {
+  padding-top: 0;
+}
 .card-event .card-image {
     margin: 0 0 10 0;
 }
@@ -212,6 +215,16 @@
     color: red;
 }
 
+SearchBar {
+  background-color: white;
+  margin: 0;
+  border: 0;
+  color: #4a4a4a;
+}
+.search-wrap {
+  padding: 10 6;
+}
+
 .theme-color,
 .card-text .card-title,
 .card-header-icon .fa,
@@ -222,7 +235,8 @@
     color: #d0021b;
 }
 .header-actionbar,
-.card-actionbar {
+.card-actionbar,
+.selectedBarItemBottomBorder {
     background-color: #d0021b;
 }
 .header-actionbar {
@@ -244,4 +258,34 @@
 Repeater GridLayout {
     background-color: #fff;
     margin: 0 0 1 0;
+}
+.bg-placeholder {
+  background-image: ~/images/dmas-files-thumbnail.png;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.fake-tabs {
+  background-color: white;
+}
+.modeSelectedButtonStyle,
+.modeButtonStyle {
+    horizontal-align: center;
+    vertical-align: center;
+    font-size: 13;
+    color: #777;
+    padding: 10;
+    margin: 0;
+    height: 40;
+    text-transform: uppercase;
+    font-family: 'SourceSansPro-Bold';
+    border: 0;
+    background-color: white;
+}
+
+.selectedBarItemBottomBorder,
+.barItemBottomBorder {
+    height: 3;
+    vertical-align: bottom;
 }

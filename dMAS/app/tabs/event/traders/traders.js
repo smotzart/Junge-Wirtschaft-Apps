@@ -1,49 +1,32 @@
 "use strict";
 
-var tabView     = require("ui/tab-view");
-var Nav         = require("~/utils/navigation/navigation");
-var viewsModule = require("~/utils/views/views");
+var closeTimeout = 0;
 
-var THIS_TAB_IDX = 3;
-var thisTab;
-var thisContent;
-
-function onTabLoaded(args) {    
-  thisTab = args.object;
-  thisTab.parent.on(tabView.TabView.selectedIndexChangedEvent, onTabChange);
-  thisContent = thisTab.page.bindingContext;
-  thisTab.bindingContext = thisContent;
-}
-exports.onTabLoaded = onTabLoaded;
-
-function onTabUnloaded(args) {
-    thisTab.parent.off(tabView.TabView.selectedIndexChangedEvent, onTabChange);
-    thisTab = null;
-}
-exports.onTabUnloaded = onTabUnloaded;
-
-function loadExhibitors() {
-  if (typeof(thisContent.exhibitorsCount) != 'undefined') {
-    return;
+function inputTap(args) {
+  if (closeTimeout) {
+    clearTimeout(closeTimeout);
   }
-  setTimeout(function() {
-    thisContent.loadExhibitors();
-  }, 200);  
+  closeTimeout = setTimeout(() => {
+    closeTimeout = 0;
+  }, 20);
 }
+exports.inputTap = inputTap;
 
-function onTabChange(args) {
-  if (args.newIndex === THIS_TAB_IDX) {
-      loadExhibitors();
+function tap (args) {
+  var page = args.object.page;
+  if (!closeTimeout) {
+    closeTimeout = setTimeout(() => {
+      page.getViewById("search1").dismissSoftInput();
+      closeTimeout = 0;
+    }, 20);
   }
 }
+exports.tap = tap;
 
-function goToTrader(args) {
-  Nav.navigate({
-    moduleName: viewsModule.Views.traderView,
-    context: {
-      model: args.view.bindingContext,
-      eventName: thisContent.event.name
-    }
-  });
+function doNotShowAndroidKeyboard(args) {
+  var searchBar = args.object;
+  if (searchBar.android) {
+    searchBar.android.clearFocus();
+  }
 }
-exports.goToTrader = goToTrader;
+exports.doNotShowAndroidKeyboard = doNotShowAndroidKeyboard;

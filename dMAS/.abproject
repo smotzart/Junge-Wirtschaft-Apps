@@ -3,9 +3,9 @@
   "ProjectGuid": "f350c9de-682f-45df-a4a9-1b0a51ac67bb",
   "projectVersion": 1,
   "AppIdentifier": "com.telerik.dMAS",
-  "DisplayName": "dMAS",
+  "DisplayName": "dMAS_dev",
   "Author": "",
-  "Description": "dMAS",
+  "Description": "dMAS_dev",
   "BundleVersion": "2.0",
   "AndroidVersionCode": "2",
   "iOSDeviceFamily": [
@@ -22,6 +22,6 @@
   ],
   "AndroidHardwareAcceleration": "true",
   "iOSStatusBarStyle": "Default",
-  "FrameworkVersion": "2.3.0",
+  "FrameworkVersion": "2.5.0",
   "Framework": "NativeScript"
 }

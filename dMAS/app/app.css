@@ -18,6 +18,10 @@ activityindicator {
     vertical-align: center;
 }
 
+ListView {
+  separator-color: transparent;
+}
+
 label,
 textfield,
 searchbar,

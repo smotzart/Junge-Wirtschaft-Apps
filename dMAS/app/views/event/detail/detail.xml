@@ -1,58 +1,59 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd"  navigatingTo="navigatingTo" actionBarHidden="true">
-    <GridLayout rows="50, *">
-        <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
-            <StackLayout col="0" verticalAlignment="center">
-                <Button text="&#xf053;" cssClass="fa" tap="goBack" />
-            </StackLayout>
-            <StackLayout col="1" verticalAlignment="center">
-                <Label text="{{ event.name }}" horizontalAlignment="center" />
-            </StackLayout>
-        </GridLayout>
-        <StackLayout row="1">
-            <TabView tabsBackgroundColor="#ffffff" selectedIndex="0" selectedColor="#d0021b">
-                <TabView.items>
-                    <TabViewItem title="Home" xmlns:HomeTab="tabs/event/home">
-                        <TabViewItem.view>
-                            <HomeTab:home />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Info" xmlns:InfoTab="tabs/event/info">
-                        <TabViewItem.view>
-                            <InfoTab:info />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Ticket" xmlns:TicketTab="tabs/event/ticket">
-                        <TabViewItem.view>
-                            <TicketTab:ticket />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Aussteller" xmlns:TradersTab="tabs/event/traders" >
-                        <TabViewItem.view>
-                            <TradersTab:traders />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Produkte" xmlns:ProductTab="tabs/event/product">
-                        <TabViewItem.view>
-                            <ProductTab:product />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Rahmenprogramm" xmlns:ProgramsTab="tabs/event/programs">
-                        <TabViewItem.view>
-                            <ProgramsTab:programs />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Messeplan" xmlns:PlaceTab="tabs/event/place">
-                        <TabViewItem.view>
-                            <PlaceTab:place />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                    <TabViewItem title="Impressum" xmlns:ImpressumTab="tabs/event/impressum">
-                        <TabViewItem.view>
-                            <ImpressumTab:impressum />
-                        </TabViewItem.view>
-                    </TabViewItem>
-                </TabView.items>
-            </TabView>
-        </StackLayout>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onPageLoaded" navigatedTo="navigatedTo" actionBarHidden="true">
+  <GridLayout rows="50, *">
+    <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
+      <StackLayout col="0" verticalAlignment="center">
+        <Button text="&#xf053;" cssClass="fa" tap="goBack" />
+      </StackLayout>
+      <StackLayout col="1" verticalAlignment="center">
+        <Label text="{{ event.name }}" horizontalAlignment="center" />
+      </StackLayout>
     </GridLayout>
+
+    <StackLayout row="1">
+      <TabView id="eventTabs" tabsBackgroundColor="#ffffff" selectedColor="#d0021b" selectedIndex="0" selectedIndexChanged="onSelectedIndexChanged">
+        <TabView.items>
+          <TabViewItem title="Home" xmlns:HomeTab="tabs/event/home">
+            <TabViewItem.view>
+              <HomeTab:home />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Info" xmlns:InfoTab="tabs/event/info">
+            <TabViewItem.view>
+              <InfoTab:info />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Ticket" xmlns:TicketTab="tabs/event/ticket">
+            <TabViewItem.view>
+              <TicketTab:ticket />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Aussteller" xmlns:TradersTab="tabs/event/traders">
+            <TabViewItem.view>
+              <TradersTab:traders />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Produkte" xmlns:ProductTab="tabs/event/product">
+            <TabViewItem.view>
+              <ProductTab:product />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Rahmenprogramm" xmlns:ProgramsTab="tabs/event/programs">
+            <TabViewItem.view>
+              <ProgramsTab:programs />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Messeplan" xmlns:PlaceTab="tabs/event/place">
+            <TabViewItem.view>
+              <PlaceTab:place />
+            </TabViewItem.view>
+          </TabViewItem>
+          <TabViewItem title="Impressum" xmlns:ImpressumTab="tabs/event/impressum">
+            <TabViewItem.view>
+              <ImpressumTab:impressum />
+            </TabViewItem.view>
+          </TabViewItem>
+        </TabView.items>
+      </TabView>
+    </StackLayout>
+  </GridLayout>
 </Page>

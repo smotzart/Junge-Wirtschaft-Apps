@@ -1,16 +1,27 @@
 "use strict";
 
-var List        = require("~/views/event/list/list-view-model");
-var Nav         = require("~/utils/navigation/navigation");
-var viewsModule = require("~/utils/views/views");
-var viewModel   = new List.ListModel();
+var List          = require("./list-model");
+var Sqlite        = require("nativescript-sqlite");
+var appSettings   = require("application-settings");
+var ListModel     = new List.ListModel();
+var moment        = require('moment');
 var page;
-
-function onPageLoaded(args) {}
-exports.onPageLoaded = onPageLoaded;
 
 function navigatingTo(args) {
   page = args.object;
-  page.bindingContext = viewModel;
+  if (!Sqlite.exists("messewels.db")) {
+    Sqlite.copyDatabase("messewels.db");
+  }
+  (new Sqlite("messewels.db")).then(db => {
+    page.bindingContext = ListModel;
+  }, error => {
+    console.log("OPEN DB ERROR", error);
+  });
 }
 exports.navigatingTo = navigatingTo;
+
+function onSelectedIndexChanged(args) {
+  ListModel.selectedCat = args.newIndex;
+  ListModel.refresh();
+}
+exports.onSelectedIndexChanged = onSelectedIndexChanged;

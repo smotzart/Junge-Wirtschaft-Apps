@@ -1,2 +1,16 @@
-<StackLayout id="test" loaded="onTabLoaded" unloaded="onTabUnloaded">
-</StackLayout>
+<GridLayout rows="*, 100" columns="*" loaded="onTabLoaded" unloaded="onTabUnloaded">
+  <GridLayout row="0" rows="180, auto" cssClass="empty-list" horizontalAlignment="center" visibility="{{ (event_places.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+    <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+      <image src="~/images/empty-man.png" stretch="none" />
+    </StackLayout>
+    <Label row="1" text="Leider gibt es in dieser Kategorie keine Veranstaltungen" textWrap="true" />
+  </GridLayout>
+  
+  <StackLayout rowSpan="2" id="test"></StackLayout>
+
+  <StackLayout row="1" verticalAlignment="bottom" visibility="{{ (event_places.length > 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+    <Button text="Detailansicht" tap="{{ openDetailView }}" cssClass="btn" margin="10 10 10 10" />
+  </StackLayout>
+
+  <ActivityIndicator rowSpan="2" busy="{{ isLoading }}" />
+</GridLayout>

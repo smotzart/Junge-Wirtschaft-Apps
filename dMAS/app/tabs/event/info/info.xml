@@ -1,39 +1,39 @@
-<ScrollView xmlns:Card="nativescript-cardview" loaded="onTabLoaded" unloaded="onTabUnloaded">
-    <StackLayout>
-        <Card:CardView cssClass="card card-header" elevation="7" radius="1">
-            <GridLayout rows="auto, auto, 30, 30" columns="*, *" padding="35 22 20 22">
-                <label row="0" colSpan="2" text="{{ event.name }}" cssClass="h1" textWrap="true" />
-                <label row="1" colSpan="2" text="{{ event.description }}" cssClass="h3" textWrap="true" marginBottom="5" />
-                <StackLayout row="2" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
-                    <GridLayout rows="auto" columns="25, *">
-                        <label row="0" col="0" text="&#xf073;" cssClass="fa" />
-                        <label row="0" col="1" text="{{ event_date }}" />
-                    </GridLayout>
-                </StackLayout>
-                <StackLayout row="3" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
-                    <GridLayout rows="auto" columns="25, *">
-                        <label row="0" col="0" text="&#xf017;" cssClass="fa" />
-                        <label row="0" col="1" text="{{ event_time }}" />
-                    </GridLayout>
-                </StackLayout>
-            </GridLayout>
-        </Card:CardView>
-        <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ event.summary ? 'visible' : 'collapsed' }}">
-            <GridLayout rows="25, *" columns="*">
-               <Label row="0" cssClass="card-title" text="MESSE" />
-               <StackLayout row="1" cssClass="card-body">
-                    <Label cssClass="last" textWrap="true" text="{{ event.summary }}" />
-               </StackLayout>
-            </GridLayout>
-        </Card:CardView>
-        <Card:CardView cssClass="card card-text" elevation="7" radius="3">
-            <GridLayout rows="25, *" columns="*">
-               <Label row="0" cssClass="card-title" text="ADRESSE" />
-               <StackLayout row="1" cssClass="card-body card-body-address">
-                    <Label textWrap="true" text="{{ event.zip + ' ' + event.city }}" />
-                    <Label textWrap="true" text="{{ event.country | countryName() }}" />
-               </StackLayout>
-            </GridLayout>
-        </Card:CardView>
-    </StackLayout>
+<ScrollView xmlns:Card="nativescript-cardview">
+  <StackLayout>
+    <Card:CardView cssClass="card card-header" elevation="7" radius="1">
+      <GridLayout rows="auto, auto, 30, 30" columns="*, *" padding="35 22 20 22">
+        <label row="0" colSpan="2" text="{{ event.name }}" cssClass="h1" textWrap="true" />
+        <label row="1" colSpan="2" text="{{ event.description }}" cssClass="h3" textWrap="true" marginBottom="5" />
+        <StackLayout row="2" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
+          <GridLayout rows="auto" columns="25, *">
+            <label row="0" col="0" text="&#xf073;" cssClass="fa" />
+            <label row="0" col="1" text="{{ event_date }}" />
+          </GridLayout>
+        </StackLayout>
+        <StackLayout row="3" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
+          <GridLayout rows="auto" columns="25, *">
+            <label row="0" col="0" text="&#xf017;" cssClass="fa" />
+            <label row="0" col="1" text="{{ event_time }}" />
+          </GridLayout>
+        </StackLayout>
+      </GridLayout>
+    </Card:CardView>
+    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ event.summary ? 'visible' : 'collapsed' }}">
+      <GridLayout rows="25, *" columns="*">
+        <Label row="0" cssClass="card-title" text="MESSE" />
+        <StackLayout row="1" cssClass="card-body">
+          <Label cssClass="last" textWrap="true" text="{{ event.summary }}" />
+        </StackLayout>
+      </GridLayout>
+    </Card:CardView>
+    <Card:CardView cssClass="card card-text" elevation="7" radius="3">
+      <GridLayout rows="25, *" columns="*">
+        <Label row="0" cssClass="card-title" text="ADRESSE" />
+        <StackLayout row="1" cssClass="card-body card-body-address">
+          <Label textWrap="true" text="{{ event.zip + ' ' + event.city }}" />
+          <Label textWrap="true" text="{{ event.country | countryName() }}" />
+        </StackLayout>
+      </GridLayout>
+    </Card:CardView>
+  </StackLayout>
 </ScrollView>

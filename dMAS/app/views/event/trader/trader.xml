@@ -15,10 +15,10 @@
                         <GridLayout rows="*, auto" columns="*">
                             <GridLayout row="0" rows="*" columns="*, 100" padding="35 22 20 22">
                                 <StackLayout col="0" verticalAlignment="center">
-                                    <label text="{{ model.trader.user.company }}" textWrap="true" cssClass="h1" />
+                                    <label text="{{ model.trader.company }}" textWrap="true" cssClass="h1" />
                                 </StackLayout>
                                 <StackLayout col="1">
-                                    <image src="{{ model.trader.user.image_url }}" stretch="aspectFit" />
+                                    <image src="{{ model.trader.image_url }}" stretch="aspectFit" />
                                 </StackLayout>                        
                             </GridLayout>
                             <StackLayout row="1" cssClass="card-footer" visibility="{{ model.trader.stand ? 'visible' : 'collapsed' }}">
@@ -41,25 +41,25 @@
                         <GridLayout rows="25, *" columns="*">
                             <Label row="0" cssClass="card-title" text="ADRESSE" />
                             <StackLayout row="1" cssClass="card-body card-body-address">
-                                <Label textWrap="true" text="{{ model.trader.user.address }}" visibility="{{ model.trader.user.address ? 'visible' : 'collapsed' }}" />
-                                <Label textWrap="true" text="{{ model.trader.user.zip + ' ' + model.trader.user.city }}" />
-                                <Label textWrap="true" text="{{ model.trader.user.country | countryName() }}" visibility="{{ model.trader.user.country ? 'visible' : 'collapsed' }}" />
+                                <Label textWrap="true" text="{{ model.trader.address }}" visibility="{{ model.trader.address ? 'visible' : 'collapsed' }}" />
+                                <Label textWrap="true" text="{{ model.trader.zip + ' ' + model.trader.city }}" />
+                                <Label textWrap="true" text="{{ model.trader.country | countryName() }}" visibility="{{ model.trader.country ? 'visible' : 'collapsed' }}" />
                             </StackLayout>
                         </GridLayout>
                     </Card:CardView>
-                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.user.website ? 'visible' : 'collapsed' }}" tap="visitWebsite">
+                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.website ? 'visible' : 'collapsed' }}" tap="visitWebsite">
                         <GridLayout rows="25, *" columns="*">
                           <Label row="0" cssClass="card-title" text="WEBSITE" />
                             <StackLayout row="1" cssClass="card-body card-body-address">
-                                <Label textWrap="true" height="23" text="{{ model.trader.user.website }}" />
+                                <Label textWrap="true" height="23" text="{{ model.trader.website }}" />
                             </StackLayout>
                         </GridLayout>
                     </Card:CardView>
-                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.user.email ? 'visible' : 'collapsed' }}" tap="sendEmail">
+                    <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.trader.email ? 'visible' : 'collapsed' }}" tap="sendEmail">
                         <GridLayout rows="25, *" columns="*">
                         <Label row="0" cssClass="card-title" text="E-MAIL" />
                             <StackLayout row="1" cssClass="card-body card-body-address">
-                                <Label textWrap="true" height="23" text="{{ model.trader.user.email }}" />
+                                <Label textWrap="true" height="23" text="{{ model.trader.email }}" />
                             </StackLayout>
                         </GridLayout>
                     </Card:CardView>

@@ -29,9 +29,9 @@ var Service = (function () {
       }
     };
     Service.prototype.getEvents = function (category) {
-      var query = "SELECT *, strftime('%m',`starts_at`) AS `month` FROM Events ORDER BY starts_at";
+      var query = "SELECT * FROM Events ORDER BY `starts_at`";
       if (category != "") {
-        query = "SELECT *, strftime('%m',`starts_at`) AS `month` FROM Events WHERE category IN ('" + category + "') ORDER BY starts_at";
+        query = "SELECT * FROM Events WHERE category IN ('" + category + "') ORDER BY `starts_at`";
       } 
       return new Promise(function (resolve, reject) {
         (new Sqlite("messewels.db")).then(db => {
@@ -86,7 +86,7 @@ var Service = (function () {
       return new Promise(function (resolve, reject) {
         (new Sqlite("messewels.db")).then(db => {
           db.resultType(2);
-          db.all("SELECT * FROM Actions WHERE event_id = ? ORDER BY or_id", [event_id]).then(rows => {
+          db.all("SELECT * FROM Actions WHERE event_id = ? ORDER BY starts_at", [event_id]).then(rows => {
             resolve(rows);
           }, error => {
             Service.showErrorAndReject(error, reject);
@@ -164,11 +164,11 @@ var Service = (function () {
                 // Insert Actions Users
                 action.users.forEach(function(user) {
                   db.execSQL("INSERT OR REPLACE INTO Users (id, action_id, or_id, first_name, gender, last_name, position, title, name, image_url) VALUES ((SELECT id FROM Users WHERE or_id = ? AND action_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?)", [user.id, action_id, action_id, user.id, user.first_name, user.gender, user.last_name, user.position, user.title, user.name, user.image_url]).then(id => {}, error => {
-                    console.log("INSERT Users ERROR", error);
+                    alert("INSERT Users ERROR", error);
                   });
                 });
               }, error => {
-                console.log("INSERT Actions ERROR", error);
+                alert("INSERT Actions ERROR " + error);
               });
             });
           }, error => {
@@ -178,6 +178,19 @@ var Service = (function () {
       });
 
         //});
+    };
+    Service.prototype.updateFav = function (id, value, tableName) {
+      return new Promise(function (resolve, reject) {
+        (new Sqlite("messewels.db")).then(db => {
+          db.execSQL("UPDATE " + tableName + " SET fav = ? WHERE id = ?", [value, id]).then(id => {
+            resolve(id);
+          }, error => {
+            Service.showErrorAndReject(error, reject);
+          });
+        }, error => {
+          Service.showErrorAndReject(error, reject);
+        });
+      });
     };
     return Service;
 }());

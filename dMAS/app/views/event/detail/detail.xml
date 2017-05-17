@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onPageLoaded" navigatedTo="navigatedTo" actionBarHidden="true">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onPageLoaded" backgroundColor="#f4f4f4" navigatedTo="navigatedTo" actionBarHidden="true">
   <GridLayout rows="50, *">
     <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
       <StackLayout col="0" verticalAlignment="center">
@@ -9,7 +9,7 @@
       </StackLayout>
     </GridLayout>
 
-    <StackLayout row="1">
+    <GridLayout row="1">
       <TabView id="eventTabs" tabsBackgroundColor="#ffffff" selectedColor="#d0021b" selectedIndex="0" selectedIndexChanged="onSelectedIndexChanged">
         <TabView.items>
           <TabViewItem title="Home" xmlns:HomeTab="tabs/event/home">
@@ -32,7 +32,7 @@
               <TradersTab:traders />
             </TabViewItem.view>
           </TabViewItem>
-          <TabViewItem title="Produkte" xmlns:ProductTab="tabs/event/product">
+          <TabViewItem title="Branchen" xmlns:ProductTab="tabs/event/product">
             <TabViewItem.view>
               <ProductTab:product />
             </TabViewItem.view>
@@ -54,6 +54,6 @@
           </TabViewItem>
         </TabView.items>
       </TabView>
-    </StackLayout>
+    </GridLayout>
   </GridLayout>
 </Page>

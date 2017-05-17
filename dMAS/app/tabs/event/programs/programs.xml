@@ -2,9 +2,14 @@
 
   <GridLayout row="2" rows="180, auto" cssClass="empty-list" horizontalAlignment="center" visibility="{{ (event_actions.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
     <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
-      <image src="~/images/empty-man.png" stretch="none" />
+      <Android>
+        <image src="~/images/empty-man.png" stretch="none" />
+      </Android>
+      <iOS>
+        <image src="res://worker" stretch="none" />
+      </iOS>
     </StackLayout>
-    <Label row="1" text="Leider gibt es in dieser Kategorie keine Veranstaltungen" textWrap="true" />
+    <Label row="1" text="Leider gibt es keine Einträge" textWrap="true" />
   </GridLayout>
 
   <GridLayout row="0" rows="*" columns="*,*" cssClass="fake-tabs" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
@@ -19,63 +24,53 @@
   </GridLayout>
 
   <StackLayout row="1" cssClass="search-wrap" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
-    <Border borderRadius="3" borderWidth="1" borderColor="#d0021b">
-      <SearchBar text="{{ actions_search }}" hint="Suche" id="search2" tap="inputTap2" android:loaded="doNotShowAndroidKeyboard" />
-    </Border>
+    <SearchBar text="{{ actions_search }}" hint="Suche" id="search2" tap="inputTap2" android:loaded="doNotShowAndroidKeyboard" />
   </StackLayout>
   
   <lv:RadListView row="2" id="actions_list" items="{{ event_actions_s }}" itemTap="{{ onActionItemTap }}" loadOnDemandMode="Auto" loadMoreDataRequested="{{ onLoadMoreItemsRequestedActions }}">
     <lv:RadListView.listViewLayout>
       <lv:ListViewLinearLayout scrollDirection="Vertical" itemInsertAnimation="Default" itemDeleteAnimation="Default" />
     </lv:RadListView.listViewLayout>
-    <lv:RadListView.itemTemplate><!--
-        <StackLayout>
-          <StackLayout marginTop="20" verticalAlignment="center" height="40" cssClass="card-separate-head">
-              <label text="{{ day_name | uppercase() }}" cssClass="theme-color" />
-          </StackLayout>
-          <Repeater items="{{ list }}">
-              <Repeater.itemsLayout>
-                <WrapLayout />
-              </Repeater.itemsLayout>
-              <Repeater.itemTemplate>-->
-                  <Card:CardView cssClass="card card-program" elevation="7" radius="3">
-                    <GridLayout margin="0" rows="auto, auto" columns="*">
-                      <GridLayout margin="0" row="0" rows="*" columns="65, *, 16" padding="10">
-                        <StackLayout row="0" col="0" verticalAlignment="top">
-                          <label cssClass="time-from" text="{{ action_time_from }}" />
-                          <label cssClass="time-to" text="{{ 'bis ' + action_time_to }}" />
-                          <StackLayout col="0" height="40" width="65" verticalAlignment="center" tap="{{ setActionAsFavourite }}">
-                            <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="fa" color="#ffd700" horizontalAlignment="center" fontSize="24" /><!-- {{ isFavourite ? '&#xf005;' : '&#xf006;' }} -->
-                          </StackLayout>
-                        </StackLayout>
-                        <StackLayout row="0" col="1" verticalAlignment="top">
-                          <label cssClass="text" text="{{ action.title }}" textWrap="true" visibility="{{ action.title ? 'visible' : 'collapsed' }}" />
-                          <label cssClass="text text-descr" text="{{ action.description | textTruncate(100) }}" textWrap="true" visibility="{{ action.title ? 'collapsed' : 'visible' }}" />
-                        </StackLayout>
-                        <StackLayout row="0" col="2" verticalAlignment="top">
-                          <Repeater items="{{ action_languages }}">
-                            <Repeater.itemTemplate>
-                              <StackLayout height="12" width="12" marginTop="3" marginBottom="1"> 
-                                <image src="{{ '~/images/flags/' + $value + '.png' }}" stretch="aspectFill" cssClass="flag-image" />
-                              </StackLayout>
-                            </Repeater.itemTemplate>
-                          </Repeater>
-                        </StackLayout>  
-                      </GridLayout>
-                      <GridLayout margin="0" row="1" rows="39" columns="50, *" cssClass="card-footer" visibility="{{ (action.location && action.location != '') ? 'visible' : 'collapsed' }}">
-                        <StackLayout height="39" row="0" col="0"></StackLayout>
-                        <StackLayout height="39" row="0" col="1" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
-                          <label text="&#xf02b;" cssClass="fa" />
-                          <label text="{{ action.location }}" />
-                        </StackLayout>
-                      </GridLayout>
-                    </GridLayout>
-                  </Card:CardView><!--
-              </Repeater.itemTemplate>
-          </Repeater>
-        </StackLayout>-->
+    <lv:RadListView.itemTemplate>
+      <StackLayout>
+        <StackLayout marginTop="15" verticalAlignment="center" height="20" cssClass="card-separate-head" visibility="{{ action.day_name ? 'visible' : 'collapsed' }}">
+          <label text="{{ action.day_name | uppercase() }}" cssClass="theme-color" />
+        </StackLayout>          
+        <Card:CardView cssClass="card card-program" elevation="7" radius="3">
+          <GridLayout margin="0" rows="auto, auto" columns="*">
+            <GridLayout margin="0" row="0" rows="*" columns="60, *, 16" padding="10">
+              <StackLayout row="0" col="0" verticalAlignment="top">
+                <label cssClass="time-from" text="{{ action_time_from }}" />
+                <label cssClass="time-to" text="{{ 'bis ' + action_time_to }}" />
+              </StackLayout>
+              <StackLayout row="0" col="1" verticalAlignment="top">
+                <label cssClass="text" text="{{ action.title }}" textWrap="true" visibility="{{ action.title ? 'visible' : 'collapsed' }}" />
+                <label cssClass="text text-descr" text="{{ action.description | textTruncate(100) }}" textWrap="true" visibility="{{ action.title ? 'collapsed' : 'visible' }}" />
+              </StackLayout>
+              <StackLayout row="0" col="2" verticalAlignment="top">
+                <Repeater items="{{ action_languages }}">
+                  <Repeater.itemTemplate>
+                    <StackLayout height="12" width="12" marginTop="3" marginBottom="1"> 
+                      <image src="{{ '~/images/flags/' + $value + '.png' }}" stretch="aspectFill" cssClass="flag-image" />
+                    </StackLayout>
+                  </Repeater.itemTemplate>
+                </Repeater>
+              </StackLayout>  
+            </GridLayout>
+            <GridLayout margin="0" row="1" rows="39" columns="50, *, 50" cssClass="card-footer">
+              <StackLayout height="39" row="0" col="0"></StackLayout>
+              <GridLayout height="39" row="0" col="1" columns="20, *" cssClass="card-attr" verticalAlignment="center" orientation="horizontal" visibility="{{ (action.location && action.location != '') ? 'visible' : 'collapsed' }}">
+                <label text="&#xf02b;" cssClass="fa" col="0" />
+                <label text="{{ action.location }}" col="1" />
+              </GridLayout>
+              <StackLayout col="2" height="39" width="50" verticalAlignment="center" tap="{{ setActionAsFavourite }}">
+                <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
+              </StackLayout>
+            </GridLayout>
+          </GridLayout>
+        </Card:CardView>
+      </StackLayout>
     </lv:RadListView.itemTemplate>
   </lv:RadListView>
-    
   <ActivityIndicator busy="{{ isLoading }}" rowSpan="3" />
 </GridLayout>

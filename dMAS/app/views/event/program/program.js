@@ -1,14 +1,15 @@
 "use strict";
-var viewModel;
 
 var navigationModule = require("~/utils/navigation/navigation");
 
+var action;
+
 function navigatingTo(args) {
   var page = args.object;
-  viewModel = page.navigationContext;
+  action = page.navigationContext;
+  action.loadUsers();
   page.bindingContext = null;
-  viewModel.model.loadUsers();
-  page.bindingContext = viewModel;
+  page.bindingContext = action;
 }
 exports.navigatingTo = navigatingTo;
 

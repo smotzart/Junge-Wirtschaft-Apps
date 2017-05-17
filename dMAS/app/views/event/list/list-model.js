@@ -50,35 +50,25 @@ var ListModel = (function (_super) {
     configurable: true
   });    
   ListModel.prototype.refresh = function () {
-    //alert("start refresh");
     var _this = this;
     if (!this.beginLoading()) {
-      //alert("return");
       return;
     };
     var getEvents = Service.service.getEventsByCat(_this.selectedCat);
     getEvents.then(function (data) {
       Timer.setTimeout(() => {
-        //alert(data.length + "-" + _this.selectedCat);
         if (data.length == 0 && _this.selectedCat == 0) {
-          //_this.endLoading();
-          //alert(" asuda");
           _this.refresh();
         }
         var events = new Array();
-        var month_index = new Array();
+        var month  = 0;
         for (var i = 0; i < data.length; i++) {
-          var month = Moment(data[i].starts_at).get('month');
-          var mi = month_index.indexOf(month);
-          if (mi == -1) {
-            month_index.push(month);
-            mi = month_index.indexOf(month);
-            events[mi] = {
-              "month_name": Moment().month(month).format('MMMM').toUpperCase(),
-              "list": new Array()
-            };
+          var c_month = Moment(data[i].starts_at).get('month');
+          if (c_month != month) {
+            events.push({'month': Moment().month(c_month).format('MMMM').toUpperCase()})
+            month = c_month;
           }
-          events[mi].list.push(new Detail.DetailShortModel(data[i]));
+          events.push(new Detail.DetailShortModel(data[i]));
         }
         _this.set("events", events);     
         _this.endLoading();
@@ -87,34 +77,6 @@ var ListModel = (function (_super) {
       _this.endLoading();
     });
   };
-  
-  ListModel.prototype.update = function () {
-    /*
-    if (Connectivity.getConnectionType() === Connectivity.connectionType.none) {
-      return false;
-    }  
-    var _this = this;
-    if (!this.beginLoading())
-      return;
-    return fetchModule("https://login.dmas.at/api/v5/ios/events.json?presenter_id=58")
-      .then(handleErrors)
-      .then(function(response) {
-        alert("banana3");
-        return response.json();
-      })
-      .then(function(data) {
-        alert("banana1");
-      });*/
-  };
   return ListModel;
 }(Base.BaseViewModel));
 exports.ListModel = ListModel;
-
-
-function handleErrors(response) {
-  alert("?");
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-};

@@ -295,6 +295,9 @@ var DetailShortModel = (function (_super) {
       context: args.view.bindingContext,
     });
   };
+  DetailShortModel.prototype.productTap = function (args) {
+    alert("productTap");
+  };
   DetailShortModel.prototype.openTicketUrl = function () {     
     return Utils.openUrl("http://www.oeticket.com/Tickets.html?affiliate=EOE&doc=artistPages%2Ftickets&fun=artist&action=tickets&erid=1759044&includeOnlybookable=false&xtmc=fishing_festival&xtnp=1&xtcr=1");
   };
@@ -387,48 +390,51 @@ var DetailShortModel = (function (_super) {
   DetailShortModel.prototype.updateCurrentStateTraders = function () {
     var _this = this;
     var textFilter = _this.traders_search ? _this.traders_search.toLocaleLowerCase() : _this.traders_search;
-    var _items_t_backup2 = _this._items_t_backup;
-    if (textFilter) {
-      _items_t_backup2 = _this._items_t_backup.filter((trader) => {
-        return trader.trader.company.toLocaleLowerCase().indexOf(textFilter) >= 0;
-      });
-    }
-    if (_this.event_traders_mode == "FAVOURITES") {
-      var filteredTraders = _items_t_backup2.filter((trader) => {        
-        return trader.isFavourite === true;
-      });
-      _this.set("event_traders", filteredTraders);
+    if (!_this._items_t_backup) {
+      timer.setTimeout(() => {
+        _this.updateCurrentStateTraders();
+      }, 500);
     } else {
-      _this.set("event_traders", _items_t_backup2);
-    }
-    var len = _this.event_traders_count > 10 ? 10 : _this.event_traders_count;
-    _this.event_traders_s.splice(0, _this.event_traders_s.length);
-    _this._numberOfAddedItems_t = 0;
-    if (_this.event_traders_mode == "ALL") {
-      for (var i = 0; i < len; ++i) {
-        _this._numberOfAddedItems_t++;
-        _this.event_traders_s.push(_this.event_traders[i]);
+      var _items_t_backup2 = _this._items_t_backup;
+      if (textFilter) {
+        _items_t_backup2 = _this._items_t_backup.filter((trader) => {
+          return (trader.trader.company.toLocaleLowerCase().indexOf(textFilter) >= 0) || (trader.trader.products.toLocaleLowerCase().indexOf(textFilter) >= 0);
+        });
       }
-    } else {     
-      for (var i = 0; i < len; ++i) {
-        if (_this.event_traders[i].isFavourite === true) {
+      if (_this.event_traders_mode == "FAVOURITES") {
+        var filteredTraders = _items_t_backup2.filter((trader) => {        
+          return trader.isFavourite === 1;
+        });
+        _this.set("event_traders", filteredTraders);
+      } else {
+        _this.set("event_traders", _items_t_backup2);
+      }
+      var len = _this.event_traders_count > 10 ? 10 : _this.event_traders_count;
+      _this.event_traders_s.splice(0, _this.event_traders_s.length);
+      _this._numberOfAddedItems_t = 0;
+      if (_this.event_traders_mode == "ALL") {
+        for (var i = 0; i < len; ++i) {
           _this._numberOfAddedItems_t++;
           _this.event_traders_s.push(_this.event_traders[i]);
         }
+      } else {     
+        for (var i = 0; i < len; ++i) {
+          if (_this.event_traders[i].isFavourite === 1) {
+            _this._numberOfAddedItems_t++;
+            _this.event_traders_s.push(_this.event_traders[i]);
+          }
+        }
       }
-    }
-    if (_this.event_traders_count > 10) {
-      _this.traders_view.loadOnDemandMode = listViewModule.ListViewLoadOnDemandMode[listViewModule.ListViewLoadOnDemandMode.Auto];
-      _this.traders_view.refresh();
+      if (_this.event_traders_count > 10) {
+        _this.traders_view.loadOnDemandMode = listViewModule.ListViewLoadOnDemandMode[listViewModule.ListViewLoadOnDemandMode.Auto];
+        _this.traders_view.refresh();
+      }
     }
   };
   DetailShortModel.prototype.onTraderItemTap = function (args) {
-    Nav.navigate({
+     Nav.navigate({
       moduleName: viewsModule.Views.traderView,
-      context: {
-        model: (this.traders_view.items).getItem(args.itemIndex),
-        eventName: this.event.name
-      }
+      context: (this.traders_view.items).getItem(args.itemIndex)
     });
   };
 
@@ -442,8 +448,14 @@ var DetailShortModel = (function (_super) {
     getActionss.then(function (data) {
       timer.setTimeout(() => {
         var actions = new Array();
+        var dayOfYear = 0;
         _this._numberOfAddedItems_a = 0;
         for (var i = 0; i < data.length; i++) {
+          var c_dayOfYear = moment(data[i].starts_at).dayOfYear();
+          if (c_dayOfYear != dayOfYear) {
+            data[i]['day_name'] = moment(data[i].starts_at).format("dd, D. MMM YYYY" );
+            dayOfYear = c_dayOfYear;
+          }
           var item = new Action.ActionViewModel(data[i]);
           actions.push(item);
           if (i < 10) {
@@ -495,7 +507,7 @@ var DetailShortModel = (function (_super) {
     }
     if (_this.event_actions_mode == "FAVOURITES") {
       var filteredActions = _items_a_backup2.filter((action) => {        
-        return action.isFavourite === true;
+        return action.isFavourite === 1;
       });
       _this.set("event_actions", filteredActions);
     } else {
@@ -511,7 +523,7 @@ var DetailShortModel = (function (_super) {
       }
     } else {     
       for (var i = 0; i < len; ++i) {
-        if (_this.event_actions[i].isFavourite === true) {
+        if (_this.event_actions[i].isFavourite === 1) {
           _this._numberOfAddedItems_a++;
           _this.event_actions_s.push(_this.event_actions[i]);
         }
@@ -525,10 +537,7 @@ var DetailShortModel = (function (_super) {
   DetailShortModel.prototype.onActionItemTap = function (args) {
     Nav.navigate({
       moduleName: viewsModule.Views.programView,
-      context: {
-        model: (this.actions_view.items).getItem(args.itemIndex),
-        eventName: this.event.name
-      }
+      context: (this.actions_view.items).getItem(args.itemIndex)
     });
   };
 

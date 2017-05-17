@@ -2,9 +2,14 @@
   
   <GridLayout row="2" rows="180, auto" cssClass="empty-list" horizontalAlignment="center" visibility="{{ (event_traders.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
     <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
-      <image src="~/images/empty-man.png" stretch="none" />
+      <Android>
+        <image src="~/images/empty-man.png" stretch="none" />
+      </Android>
+      <iOS>
+        <image src="res://worker" stretch="none" />
+      </iOS>
     </StackLayout>
-    <Label row="1" text="Leider gibt es in dieser Kategorie keine Veranstaltungen" textWrap="true" />
+    <Label row="1" text="Leider gibt es keine Einträge" textWrap="true" />
   </GridLayout>
 
   <GridLayout row="0" rows="*" columns="*,*" cssClass="fake-tabs" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
@@ -19,12 +24,10 @@
   </GridLayout>
 
   <StackLayout row="1" cssClass="search-wrap" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
-    <Border borderRadius="3" borderWidth="1" borderColor="#d0021b">
-      <SearchBar text="{{ traders_search }}" hint="Suche" id="search1" tap="inputTap" android:loaded="doNotShowAndroidKeyboard" />
-    </Border>
+    <SearchBar text="{{ traders_search }}" hint="Suche" id="search1" tap="inputTap" android:loaded="doNotShowAndroidKeyboard" />
   </StackLayout>
 
-  <lv:RadListView row="2" id="traders_list" items="{{ event_traders_s }}" itemTap="{{ onTraderItemTap }}" loadOnDemandMode="Auto" loadMoreDataRequested="{{ onLoadMoreItemsRequestedTraders }}">
+  <lv:RadListView row="2" id="traders_list" items="{{ event_traders_s }}" itemTap="{{ onTraderItemTap }}" pullToRefresh="false" loadOnDemandMode="Auto" loadMoreDataRequested="{{ onLoadMoreItemsRequestedTraders }}">
     <lv:RadListView.listViewLayout>
       <lv:ListViewLinearLayout scrollDirection="Vertical" itemInsertAnimation="Default" itemDeleteAnimation="Default" />
     </lv:RadListView.listViewLayout>
@@ -34,21 +37,21 @@
           <StackLayout height="18" row="0" orientation="vertical" horizontalAlignment="left" cssClass="{{ 'card-trader-label ' + trader.tag }}" visibility="{{ trader.tag ? 'visible' : 'collapsed' }}">
             <label height="18" text="{{ trader.tag | uppercase() }}" />
           </StackLayout>
-          <GridLayout margin="0" row="1" rows="*" columns="50, *, 100" padding="10 10 10 0">
-            <StackLayout col="0" height="30" width="50" verticalAlignment="center" tap="{{ setTraderAsFavourite }}">
-              <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="fa" color="#ffd700" horizontalAlignment="center" fontSize="24" />
-            </StackLayout>
-            <StackLayout col="1" cssClass="card-body-large" verticalAlignment="center">
+          <GridLayout margin="0" row="1" rows="*" columns="*, 100" padding="10 10 10 20">
+            <StackLayout col="0" cssClass="card-body-large" verticalAlignment="center">
               <label text="{{ trader.company }}" textWrap="true" />
             </StackLayout>
-            <StackLayout col="2" verticalAlignment="center" visibility="{{ trader.image_url ? 'visible' : 'collapsed' }}">
+            <StackLayout col="1" verticalAlignment="center" visibility="{{ trader.image_url ? 'visible' : 'collapsed' }}">
               <image src="{{ trader.image_url }}" verticalAlignment="center" stretch="aspectFit" />
             </StackLayout>
           </GridLayout>
           <StackLayout row="2" cssClass="card-footer" visibility="{{ trader.stand ? 'visible' : 'collapsed' }}">
-            <GridLayout rows="*" columns="18, *" height="39" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
+            <GridLayout rows="*" columns="18, *, 50" height="39" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
               <label text="&#xf041;" col="0" cssClass="fa" />
               <label text="{{ trader.stand }}" col="1" />
+              <StackLayout col="2" height="39" width="50" verticalAlignment="center" tap="{{ setTraderAsFavourite }}">
+                <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
+              </StackLayout>
             </GridLayout>
           </StackLayout>
         </GridLayout>

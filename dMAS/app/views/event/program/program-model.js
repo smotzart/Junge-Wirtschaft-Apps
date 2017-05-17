@@ -2,6 +2,7 @@
 
 var Base        = require("~/components/common/base-view-model");
 var Service     = require("~/utils/service/service");
+var Person      = require("~/views/event/program/person-model");
 var observable  = require("data/observable-array");
 var moment      = require('moment');
 var timer       = require("timer");
@@ -11,7 +12,7 @@ var ActionViewModel = (function (_super) {
     function ActionViewModel(action) {
       _super.call(this);
       this.action       = action;
-      this.isFavourite  = false;
+      this.isFavourite  = this.action.fav;
     }
     Object.defineProperty(ActionViewModel.prototype, "action", {
       get: function () {
@@ -121,7 +122,7 @@ var ActionViewModel = (function (_super) {
         timer.setTimeout(() => {
           var users = new observable.ObservableArray();
           for (var i = 0; i < data.length; i++) {
-            users.push(data[i]);
+            users.push(new Person.PersonViewModel(data[i]));
           }
           _this.set("action_users", users);
           _this.endLoading();
@@ -130,11 +131,13 @@ var ActionViewModel = (function (_super) {
         _this.endLoading();
       });
     };  
-
     ActionViewModel.prototype.toggleFavourite = function () {
       var _this = this;
       var favourite = _this.get("isFavourite");
-      return _this.set("isFavourite", !favourite);
+      var toggleFav = Service.service.updateFav(_this.action.id, favourite ? 0 : 1, 'Actions');
+      toggleFav.then(function(data) {
+        return _this.set("isFavourite", favourite ? 0 : 1); 
+      });
     };
     return ActionViewModel;
 }(Base.BaseViewModel));

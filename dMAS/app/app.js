@@ -9,6 +9,7 @@ var serviceModule     = require("~/utils/service/service");
 var imageCache        = require("nativescript-web-image-cache");
 var connectivity      = require("connectivity");
 var moment            = require('moment');
+var googleAnalytics   = require("nativescript-google-analytics");
 
 updateData();
 
@@ -16,8 +17,32 @@ applicationModule.mainEntry = {
   moduleName: viewsModule.Views.eventList
 };
 
+if (applicationModule.ios) {
+  //iOS 
+  var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+  };
+    
+  var appDelegate = (function (_super) {
+    __extends(appDelegate, _super);
+    function appDelegate() {
+      _super.apply(this, arguments);
+    }    
+    appDelegate.prototype.applicationDidFinishLaunchingWithOptions = function (applicationModule, launchOptions) {
+      initAnalytics(); //Module Code to initalize 
+    };    
+    appDelegate.ObjCProtocols = [UIApplicationDelegate];
+    return appDelegate;
+  })(UIResponder);
+  applicationModule.ios.delegate = appDelegate;
+}
+
 applicationModule.on(applicationModule.launchEvent, function(args) {
   if (args.android) {   
+    initAnalytics();
     imageCache.initialize();
     // hook the onActivityCreated callback upon application launching
     applicationModule.android.onActivityCreated = function(activity) {
@@ -46,6 +71,18 @@ applicationModule.resources["textTruncate"] = textTruncate;
 applicationModule.resources["uppercase"]    = uppercase;
 
 applicationModule.start();
+
+function initAnalytics(){
+  googleAnalytics.initalize({
+    trackingId: "UA-XXXXXXXX-1", //YOUR Id from GA 
+    //userId: "9ac7a034-ffde-4783-8374-f78b3df39d32", //Optional 
+    dispatchInterval: 5,
+    logging: {
+      native: true,
+      console: false
+    }
+  });
+}
 
 function updateData() {  
   if (connectivity.getConnectionType() === connectivity.connectionType.none) {

@@ -8,6 +8,10 @@
     margin-right: -5;
 }
 
+.card-event {
+  background-color: #ffffff;
+}
+
 .card-event,
 .card-program {
     margin-top: 3;
@@ -216,13 +220,12 @@
 }
 
 SearchBar {
-  background-color: white;
   margin: 0;
   border: 0;
   color: #4a4a4a;
 }
 .search-wrap {
-  padding: 10 6;
+  padding: 5 0;
 }
 
 .theme-color,
@@ -288,4 +291,11 @@ Repeater GridLayout {
 .barItemBottomBorder {
     height: 3;
     vertical-align: bottom;
+}
+
+.fa.isFavTrue {
+  color: #ffd700;
+}
+.fa.isFavFalse {
+  color: #5d5d5d;
 }

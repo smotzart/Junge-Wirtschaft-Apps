@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:IC="nativescript-web-image-cache" actionBarHidden="true" shownModally="onShownModally" loaded="onLoaded" unloaded="onUnloaded">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:IC="nativescript-web-image-cache" backgroundColor="#f4f4f4" actionBarHidden="true" shownModally="onShownModally" loaded="onLoaded" unloaded="onUnloaded">
     <GridLayout rows="50, *">
         <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
             <StackLayout col="1" verticalAlignment="center">

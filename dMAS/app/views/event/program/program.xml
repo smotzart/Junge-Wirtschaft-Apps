@@ -1,83 +1,89 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview" navigatingTo="navigatingTo" actionBarHidden="true">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview" backgroundColor="#f4f4f4" navigatingTo="navigatingTo" actionBarHidden="true">
   <GridLayout rows="50, *">
     <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
       <StackLayout col="0" verticalAlignment="center">
         <Button text="&#xf053;" cssClass="fa" tap="goBack" />
       </StackLayout>
       <StackLayout col="1" verticalAlignment="center">
-        <Label text="{{ eventName }}" horizontalAlignment="center" />
+        <Label text="Programm Detail" horizontalAlignment="center" />
       </StackLayout>
     </GridLayout>
     <StackLayout row="1">
       <ScrollView>
         <StackLayout>    
           <Card:CardView cssClass="card card-header" elevation="7" radius="1">
-              <GridLayout rows="auto, 30, 30, 30, 30" columns="*, *" padding="35 22 20 22">
-                  <label marginBottom="10" row="0" colSpan="2" text="{{ model.action.title }}" cssClass="h1" textWrap="true" />
-                  <StackLayout row="1" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
-                      <GridLayout rows="auto" columns="25, *">
-                          <label row="0" col="0" text="&#xf073;" cssClass="fa" />
-                          <label row="0" col="1" text="{{ model.action_date }}" />
-                      </GridLayout>
-                  </StackLayout>
-                  <StackLayout row="2" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
-                      <GridLayout rows="auto" columns="25, *">
-                          <label row="0" col="0" text="&#xf017;" cssClass="fa" />
-                          <label row="0" col="1" text="{{ model.action_time_from + ' - ' + model.action_time_to }}" />
-                      </GridLayout>
-                  </StackLayout>
-                  <StackLayout row="3" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
-                      <GridLayout rows="auto" columns="25, *">
-                          <label row="0" col="0" text="&#xf041;" cssClass="fa" />
-                          <label row="0" col="1" text="{{ model.action.location }}" />
-                      </GridLayout>
-                  </StackLayout>
-                  <StackLayout row="4" colSpan="2" cssClass="card-langs" verticalAlignment="center" horizontalAlignment="left" orientation="horizontal">
-                      <Repeater items="{{ model.action_languages }}">
-                          <Repeater.itemsLayout>
-                              <StackLayout orientation="horizontal" />
-                          </Repeater.itemsLayout>
-                          <Repeater.itemTemplate>
-                              <image src="{{ '~/images/flags/' + $value + '.png' }}" stretch="aspectFill" cssClass="flag-image" height="20" width="20" marginRight="5" />
-                          </Repeater.itemTemplate>
-                      </Repeater>   
-                  </StackLayout>
-              </GridLayout>
+            <GridLayout rows="auto, 30, 30, 30, 30" columns="*, 30" padding="20 22 20 22">
+              <label marginBottom="10" row="0" col="0" text="{{ action.title }}" cssClass="h1" textWrap="true" visibility="{{ action.title ? 'visible' : 'collapsed' }}"/>
+              <StackLayout col="1" height="30" width="30" verticalAlignment="center" tap="{{ toggleFavourite }}">
+                <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
+              </StackLayout>
+              <StackLayout row="1" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
+                  <GridLayout rows="auto" columns="25, *">
+                      <label row="0" col="0" text="&#xf073;" cssClass="fa" />
+                      <label row="0" col="1" text="{{ action_date }}" />
+                  </GridLayout>
+              </StackLayout>
+              <StackLayout row="2" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
+                  <GridLayout rows="auto" columns="25, *">
+                      <label row="0" col="0" text="&#xf017;" cssClass="fa" />
+                      <label row="0" col="1" text="{{ action_time_to }}" />
+                  </GridLayout>
+              </StackLayout>
+              <StackLayout row="3" colSpan="2" cssClass="card-header-icon" verticalAlignment="center" orientation="horizontal">
+                  <GridLayout rows="auto" columns="25, *">
+                      <label row="0" col="0" text="&#xf041;" cssClass="fa" />
+                      <label row="0" col="1" text="{{ action.location }}" />
+                  </GridLayout>
+              </StackLayout>
+              <StackLayout row="4" colSpan="2" cssClass="card-langs" verticalAlignment="center" horizontalAlignment="left" orientation="horizontal">
+                  <Repeater items="{{ action_languages }}">
+                      <Repeater.itemsLayout>
+                          <StackLayout orientation="horizontal" />
+                      </Repeater.itemsLayout>
+                      <Repeater.itemTemplate>
+                          <image src="{{ '~/images/flags/' + $value + '.png' }}" stretch="aspectFill" cssClass="flag-image" height="20" width="20" marginRight="5" />
+                      </Repeater.itemTemplate>
+                  </Repeater>   
+              </StackLayout>
+            </GridLayout>
           </Card:CardView>
-          <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ model.action.description ? 'visible' : 'collapsed' }}">
+          <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ action.description ? 'visible' : 'collapsed' }}">
               <GridLayout rows="25, *" columns="*">
               <Label row="0" cssClass="card-title" text="INHALT" />
               <StackLayout row="1" cssClass="card-body">
-                  <Label cssClass="last" textWrap="true" text="{{ model.action.description }}" />
+                  <Label cssClass="last" textWrap="true" text="{{ action.description }}" />
               </StackLayout>
               </GridLayout>
           </Card:CardView>                  
-          <WrapLayout>
-            <StackLayout verticalAlignment="center" height="40" cssClass="card-separate-head">
+          <GridLayout rows="40, *">
+            <StackLayout verticalAlignment="center" row="0" height="40" cssClass="card-separate-head" visibility="{{ action_users.length > 0 ? 'visible' : 'collapsed' }}">
               <label text="PERSONEN" cssClass="theme-color" />
-            </StackLayout>
-                
-            <Repeater items="{{ model.action_users }}">
+            </StackLayout>                
+            <Repeater items="{{ action_users }}" row="1">
               <Repeater.itemTemplate>
                 <Card:CardView cssClass="card card-person" elevation="7" radius="3">
-                  <GridLayout rows="80" columns="85, *">
+                  <GridLayout rows="80" columns="85, *, 50">
                     <AbsoluteLayout row="0" col="0" width="85" height="80" verticalAlignment="center">
                       <StackLayout left="10" top="10" width="60" height="60">
-                        <image src="{{ $value.image_url }}" stretch="aspectFill" />
+                        <image src="{{ $value.person.image_url }}" borderRadius="30" stretch="aspectFill" />
                       </StackLayout>                    
                     </AbsoluteLayout>
-                    <AbsoluteLayout row="0" colSpan="2" width="*" height="80" verticalAlignment="center">
-                      <Label height="13" text="{{ $value.position | uppercase() }}" left="0" top="0" cssClass="person-label inverse" visibility="{{ $value.position ? 'visible' : 'collapsed' }}" />
+                    <AbsoluteLayout row="0" colSpan="3" width="*" height="80" verticalAlignment="center">
+                      <Label height="13" text="{{ $value.person.position | uppercase() }}" left="0" top="0" cssClass="person-label inverse" visibility="{{ $value.person.position ? 'visible' : 'collapsed' }}" />
                     </AbsoluteLayout>
                     <StackLayout row="0" col="1" cssClass="person-body" verticalAlignment="center">
-                      <Label text="{{ $value.name }}" cssClass="person-name" textWrap="true" />
+                      <Label text="{{ $value.person.name }}" cssClass="person-name" textWrap="true" />
                       <!--<Label text="TÜV Österreich" textWrap="true" />-->
+                    </StackLayout>
+                    <StackLayout col="2" height="50" width="50" verticalAlignment="center" tap="{{ togglePFavourite }}">
+                      <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
                     </StackLayout>
                   </GridLayout>
                 </Card:CardView>
               </Repeater.itemTemplate>
             </Repeater>
-          </WrapLayout>              
+            <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" />
+          </GridLayout>              
         </StackLayout>
       </ScrollView>
     </StackLayout>

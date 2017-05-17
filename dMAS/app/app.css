@@ -1,3 +1,14 @@
+.ios-segmented-bar {
+  color: #4a4a4a;
+  background-color: #ffffff;
+  selected-background-color: transparent;
+  border-radius: 1;
+  border-witdh: 3;
+  border-color: blue;
+  height: 50;
+
+}
+
 .km-icon {
     font-family: 'SourceSansPro-Regular';
     vertical-align: center;
@@ -20,6 +31,7 @@ activityindicator {
 
 ListView {
   separator-color: transparent;
+  background-color: transparent; 
 }
 
 label,
@@ -31,6 +43,10 @@ switch {
 
 switch {
     horizontal-align: right;
+}
+
+.bg {
+  background-color: #f4f4f4;
 }
 
 .form-item {
@@ -160,7 +176,7 @@ ActionBar {
 }
 
 .fa {
-    font-family: "fontawesome-webfont";
+    font-family: "FontAwesome", fontawesome-webfont;
 }
 /* START_CUSTOM_CODE_nativeScriptApp */
 
@@ -338,6 +354,7 @@ ActionBar {
 .productListItem {
     font-size: 17;
     padding: 0 15 0 15;
+    color: #4a4a4a;
 }
 .programStyle  {
     background-color: #fff;

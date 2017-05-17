@@ -2,12 +2,12 @@
   "ProjectName": "dMAS",
   "ProjectGuid": "f350c9de-682f-45df-a4a9-1b0a51ac67bb",
   "projectVersion": 1,
-  "AppIdentifier": "com.telerik.dMAS",
-  "DisplayName": "dMAS_dev",
-  "Author": "",
-  "Description": "dMAS_dev",
-  "BundleVersion": "2.0",
-  "AndroidVersionCode": "2",
+  "AppIdentifier": "com.telerik.MesseWels",
+  "DisplayName": "MesseWels",
+  "Author": "Serhii Kotsar",
+  "Description": "MesseWels",
+  "BundleVersion": "3.0",
+  "AndroidVersionCode": "3",
   "iOSDeviceFamily": [
     "1",
     "2"

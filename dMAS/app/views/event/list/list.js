@@ -13,6 +13,7 @@ function navigatingTo(args) {
     Sqlite.copyDatabase("messewels.db");
   }
   (new Sqlite("messewels.db")).then(db => {
+    ListModel.refresh();
     page.bindingContext = ListModel;
   }, error => {
     console.log("OPEN DB ERROR", error);

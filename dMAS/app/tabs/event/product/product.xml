@@ -1,13 +1,18 @@
 <GridLayout rows="*" xmlns:Card="nativescript-cardview">
   <GridLayout row="0" rows="180, auto" cssClass="empty-list" horizontalAlignment="center" visibility="{{ (event_products_count == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
     <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+      <Android>
         <image src="~/images/empty-man.png" stretch="none" />
+      </Android>
+      <iOS>
+        <image src="res://worker" stretch="none" />
+      </iOS>
     </StackLayout>
     <Label row="1" text="Leider gibt es in dieser Kategorie keine Veranstaltungen" textWrap="true" />
   </GridLayout>
-  <ListView items="{{ event_products }}" row="0" separatorColor="transparent" visibility="{{ (event_products_count > 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+  <ListView items="{{ event_products }}" cssClass="bg" row="0" separatorColor="transparent" visibility="{{ (event_products_count > 0 && !isLoading) ? 'visible' : 'collapsed' }}">
     <ListView.itemTemplate>
-      <StackLayout>
+      <StackLayout cssClass="bg">
         <StackLayout marginTop="20" verticalAlignment="center" height="40" cssClass="card-separate-head">
           <label text="{{ cat_name }}" cssClass="theme-color" />
         </StackLayout>                
@@ -16,7 +21,7 @@
             <WrapLayout />
           </Repeater.itemsLayout>
           <Repeater.itemTemplate>
-            <GridLayout rows="44" columns="*" verticalAlignment="center">
+            <GridLayout rows="44" columns="*" tap="productTap" verticalAlignment="center" backgroundColor="white">
               <label row="0" col="0" text="{{ $value }}" cssClass="productListItem" />
             </GridLayout>
           </Repeater.itemTemplate>

@@ -1,0 +1,100 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+  xmlns:lv="nativescript-telerik-ui/listview" 
+  xmlns:sdc="views/side-drawer-content"
+  xmlns:Card="nativescript-cardview"
+  xmlns:IC="nativescript-web-image-cache"
+  navigatingTo="navigatingTo" 
+  ios:actionBarHidden="true"
+  actionBarHidden="true">
+
+  <drawer:RadSideDrawer id="sideDrawer" drawerSize="250">
+    <drawer:RadSideDrawer.drawerContent>
+      <sdc:side-drawer-content />
+    </drawer:RadSideDrawer.drawerContent>
+    <drawer:RadSideDrawer.mainContent>
+      <GridLayout rows="50, *">
+        <GridLayout row="0" className="header-actionbar" columns="50, *, 50">
+          <StackLayout col="0" verticalAlignment="center">
+            <Button text="&#xf0c9;" className="fa" tap="{{ showSlideout }}" />
+          </StackLayout>
+          <StackLayout col="1" verticalAlignment="center">
+            <Label text="{{ event.name }}" horizontalAlignment="center" />
+          </StackLayout>
+        </GridLayout>
+        <GridLayout row="1">
+          <GridLayout rows="auto, auto, *" tap="tap">
+    
+            <GridLayout row="2" rows="180, auto" className="empty-list" horizontalAlignment="center" visibility="{{ (event_traders.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+              <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+                <Android>
+                  <image src="~/images/empty-man.png" stretch="none" />
+                </Android>
+                <iOS>
+                  <image src="res://worker" stretch="none" />
+                </iOS>
+              </StackLayout>
+              <Label row="1" text="Leider gibt es keine Einträge" textWrap="true" />
+            </GridLayout>
+
+            <GridLayout row="0" rows="*" columns="*,*" className="fake-tabs" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
+              <StackLayout col="0">
+                <Button text="Alle" tap="{{ setTradersAllMode }}" className="modeSelectedButtonStyle" />
+                <GridLayout className="{{ event_traders_mode === 'ALL' ? 'selectedBarItemBottomBorder' : 'barItemBottomBorder'}}" />
+              </StackLayout>
+              <StackLayout col="1">
+                <Button text="Favorites" tap="{{ setTradersFavoritesMode }}" className="modeSelectedButtonStyle" />
+                <GridLayout className="{{ event_traders_mode === 'FAVOURITES' ? 'selectedBarItemBottomBorder' : 'barItemBottomBorder'}}" />
+              </StackLayout>
+            </GridLayout>
+
+            <StackLayout row="1" className="search-wrap" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
+              <SearchBar text="{{ traders_search }}" hint="Suche" id="search1" tap="inputTap" android:loaded="doNotShowAndroidKeyboard" />
+            </StackLayout>
+
+            <lv:RadListView row="2" id="traders_list" items="{{ event_traders_s }}" pullToRefresh="false" loadOnDemandMode="Auto" loadMoreDataRequested="{{ onLoadMoreItemsRequestedTraders }}">
+              <lv:RadListView.listViewLayout>
+                <lv:ListViewLinearLayout scrollDirection="Vertical" itemInsertAnimation="Default" itemDeleteAnimation="Default" />
+              </lv:RadListView.listViewLayout>
+              <lv:RadListView.itemTemplate>
+                <Card:CardView className="card" elevation="7" radius="3" tap="{{ onTraderItemTap }}">
+                  <GridLayout margin="0" rows="auto, auto, auto" columns="*">
+                    <StackLayout height="18" row="0" orientation="vertical" horizontalAlignment="left" className="{{ 'card-trader-label ' + trader.tag }}" visibility="{{ trader.tag ? 'visible' : 'collapsed' }}">
+                      <label height="18" text="{{ trader.tag | uppercase() }}" />
+                    </StackLayout>
+                    <GridLayout margin="0" row="1" rows="*" columns="*, 100" padding="10 10 10 20">
+                      <StackLayout col="0" className="card-body-large" verticalAlignment="center">
+                        <label text="{{ trader.company }}" textWrap="true" />
+                      </StackLayout>
+                      <StackLayout col="1" verticalAlignment="center" visibility="{{ trader.image_url ? 'visible' : 'collapsed' }}">
+                        <image src="{{ trader.image_url }}" verticalAlignment="center" stretch="aspectFit" />
+                      </StackLayout>
+                    </GridLayout>
+                    <StackLayout row="2" className="card-footer" visibility="{{ trader.stand ? 'visible' : 'collapsed' }}">
+                      <GridLayout rows="*" columns="18, *, 50" height="39" className="card-attr" verticalAlignment="center" orientation="horizontal">
+                        <label text="&#xf041;" col="0" className="fa" />
+                        <label text="{{ trader.stand }}" col="1" />
+                        <StackLayout col="2" height="39" width="50" verticalAlignment="center" tap="{{ setTraderAsFavourite }}">
+                          <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" className="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
+                        </StackLayout>
+                      </GridLayout>
+                    </StackLayout>
+                  </GridLayout>
+                </Card:CardView>
+              </lv:RadListView.itemTemplate><!--
+              <lv:RadListView.headerItemTemplate>
+                <GridLayout paddingTop="15" rows="40">
+                  <StackLayout row="0" verticalAlignment="center" height="40" className="card-separate-head">
+                    <label text="{{ exhibitorsCount + ' AUSSTELLER' }}" />
+                  </StackLayout>
+                </GridLayout>
+              </lv:RadListView.headerItemTemplate>-->
+            </lv:RadListView>
+            
+            <ActivityIndicator busy="{{ isLoading }}" rowSpan="3" />
+          </GridLayout>
+        </GridLayout>
+      </GridLayout>
+    </drawer:RadSideDrawer.mainContent>
+  </drawer:RadSideDrawer>
+</Page>

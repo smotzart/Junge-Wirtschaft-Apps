@@ -1,11 +1,11 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:maps="nativescript-google-maps-sdk" actionBarHidden="true" shownModally="onShownModally" loaded="onLoaded" unloaded="onUnloaded">
     <GridLayout rows="50, *">
-        <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
+        <GridLayout row="0" className="header-actionbar" columns="50, *, 50">
             <StackLayout col="1" verticalAlignment="center">
                 <Label text="{{ event_name }}" horizontalAlignment="center" />
             </StackLayout>
             <StackLayout col="2" verticalAlignment="center">
-                <Button text="&#xf00d;" cssClass="fa" tap="closeModally" />
+                <Button text="&#xf00d;" className="fa" tap="closeModally" />
             </StackLayout>
         </GridLayout>
         <StackLayout row="1">

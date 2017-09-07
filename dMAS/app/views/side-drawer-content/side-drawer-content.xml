@@ -1,0 +1,28 @@
+<ScrollView className="drawer">
+  <GridLayout rows="50, *" loaded="onLoaded" unloaded="onUnloaded">
+    <GridLayout row="0" columns="50, *" verticalAlignment="center" className="drawer-top">
+      <Button text="&#xf053;" col="0" className="fa" tap="goBack" />
+      <Label text="Alle Messen" col="1" />
+    </GridLayout>
+    <StackLayout row="1">
+      <Button text="Home" tag="views/drawer/home/home" tap="openPage" className="{{ (menuIndex == 0) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Info" tag="views/drawer/info/info" tap="openPage" className="{{ (menuIndex == 1) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Ticket" tag="views/drawer/ticket/ticket" tap="openPage" className="{{ (menuIndex == 2) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Aussteller" tag="views/drawer/traders/traders" tap="openPage" className="{{ (menuIndex == 3) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Branchen" tag="views/drawer/products/products" tap="openPage" className="{{ (menuIndex == 4) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Rahmenprogramm" tag="views/drawer/actions/actions" tap="openPage" className="{{ (menuIndex == 5) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Messeplan" tag="views/drawer/places/places" tap="openPage" className="{{ (menuIndex == 6) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Impressum" tag="views/drawer/imprint/imprint" tap="openPage" className="{{ (menuIndex == 7) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
+      <GridLayout rows="1" className="drawer-devider"></GridLayout>
+      <Button text="Maps" tag="views/drawer/maps/maps" tap="openPage"  />
+    </StackLayout>
+  </GridLayout>
+  
+</ScrollView>

@@ -1,0 +1,42 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer" 
+  navigatingTo="onNavigatingTo"
+  loaded="pageLoaded"
+  backgroundSpanUnderStatusBar="true"
+  ios:actionBarHidden="true"
+  actionBarHidden="true">
+
+  <nsDrawer:RadSideDrawer id="sideDrawer">
+    <nsDrawer:RadSideDrawer.drawerContent>
+      <StackLayout backgroundColor="gray">
+        <StackLayout height="56" style="text-align: center; vertical-align: center;">
+          <Label text="Navigation Menu"/>
+        </StackLayout>
+        <StackLayout>
+          <Label text="Primary" padding="10" backgroundColor="lightgray"/>
+          <Label text="Social" padding="10"/>
+          <Label text="Promotions" padding="10" />
+          <Label text="Labels" padding="10" backgroundColor="lightgray" />
+          <Label text="Important" padding="10" />
+          <Label text="Starred" padding="10" />
+          <Label text="Sent Mail" padding="10" />
+          <Label text="Drafts" padding="10" />
+        </StackLayout>
+        <Label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" tap="{{ onCloseDrawerTap }}"/>
+
+      </StackLayout>
+    </nsDrawer:RadSideDrawer.drawerContent>
+
+    <nsDrawer:RadSideDrawer.mainContent>
+      <StackLayout >
+        <Label text="SideDrawer for NativeScript can be easily setup in the XML definition of your page by defining main- and drawer-content." textWrap="true" fontSize="13" padding="10" />
+
+        <Button text="Open drawer" tap="{{ onOpenDrawerTap }}" margin="10" style="horizontal-align: left" />
+
+      </StackLayout>
+    </nsDrawer:RadSideDrawer.mainContent>
+  </nsDrawer:RadSideDrawer>
+
+</Page>'
+
+

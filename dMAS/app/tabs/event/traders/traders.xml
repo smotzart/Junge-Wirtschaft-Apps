@@ -1,6 +1,6 @@
 <GridLayout rows="auto, auto, *" xmlns:Card="nativescript-cardview" xmlns:lv="nativescript-telerik-ui/listview" tap="tap">
   
-  <GridLayout row="2" rows="180, auto" cssClass="empty-list" horizontalAlignment="center" visibility="{{ (event_traders.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+  <GridLayout row="2" rows="180, auto" className="empty-list" horizontalAlignment="center" visibility="{{ (event_traders.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
     <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
       <Android>
         <image src="~/images/empty-man.png" stretch="none" />
@@ -12,18 +12,18 @@
     <Label row="1" text="Leider gibt es keine Einträge" textWrap="true" />
   </GridLayout>
 
-  <GridLayout row="0" rows="*" columns="*,*" cssClass="fake-tabs" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
+  <GridLayout row="0" rows="*" columns="*,*" className="fake-tabs" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
     <StackLayout col="0">
-      <Button text="Alle" tap="{{ setTradersAllMode }}" cssClass="modeSelectedButtonStyle" />
-      <GridLayout cssClass="{{ event_traders_mode === 'ALL' ? 'selectedBarItemBottomBorder' : 'barItemBottomBorder'}}" />
+      <Button text="Alle" tap="{{ setTradersAllMode }}" className="modeSelectedButtonStyle" />
+      <GridLayout className="{{ event_traders_mode === 'ALL' ? 'selectedBarItemBottomBorder' : 'barItemBottomBorder'}}" />
     </StackLayout>
     <StackLayout col="1">
-      <Button text="Favorites" tap="{{ setTradersFavoritesMode }}" cssClass="modeSelectedButtonStyle" />
-      <GridLayout cssClass="{{ event_traders_mode === 'FAVOURITES' ? 'selectedBarItemBottomBorder' : 'barItemBottomBorder'}}" />
+      <Button text="Favorites" tap="{{ setTradersFavoritesMode }}" className="modeSelectedButtonStyle" />
+      <GridLayout className="{{ event_traders_mode === 'FAVOURITES' ? 'selectedBarItemBottomBorder' : 'barItemBottomBorder'}}" />
     </StackLayout>
   </GridLayout>
 
-  <StackLayout row="1" cssClass="search-wrap" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
+  <StackLayout row="1" className="search-wrap" visibility="{{ (!isLoading) ? 'visible' : 'collapsed' }}">
     <SearchBar text="{{ traders_search }}" hint="Suche" id="search1" tap="inputTap" android:loaded="doNotShowAndroidKeyboard" />
   </StackLayout>
 
@@ -32,25 +32,25 @@
       <lv:ListViewLinearLayout scrollDirection="Vertical" itemInsertAnimation="Default" itemDeleteAnimation="Default" />
     </lv:RadListView.listViewLayout>
     <lv:RadListView.itemTemplate>
-      <Card:CardView cssClass="card" elevation="7" radius="3">
+      <Card:CardView className="card" elevation="7" radius="3">
         <GridLayout margin="0" rows="auto, auto, auto" columns="*">
-          <StackLayout height="18" row="0" orientation="vertical" horizontalAlignment="left" cssClass="{{ 'card-trader-label ' + trader.tag }}" visibility="{{ trader.tag ? 'visible' : 'collapsed' }}">
+          <StackLayout height="18" row="0" orientation="vertical" horizontalAlignment="left" className="{{ 'card-trader-label ' + trader.tag }}" visibility="{{ trader.tag ? 'visible' : 'collapsed' }}">
             <label height="18" text="{{ trader.tag | uppercase() }}" />
           </StackLayout>
           <GridLayout margin="0" row="1" rows="*" columns="*, 100" padding="10 10 10 20">
-            <StackLayout col="0" cssClass="card-body-large" verticalAlignment="center">
+            <StackLayout col="0" className="card-body-large" verticalAlignment="center">
               <label text="{{ trader.company }}" textWrap="true" />
             </StackLayout>
             <StackLayout col="1" verticalAlignment="center" visibility="{{ trader.image_url ? 'visible' : 'collapsed' }}">
               <image src="{{ trader.image_url }}" verticalAlignment="center" stretch="aspectFit" />
             </StackLayout>
           </GridLayout>
-          <StackLayout row="2" cssClass="card-footer" visibility="{{ trader.stand ? 'visible' : 'collapsed' }}">
-            <GridLayout rows="*" columns="18, *, 50" height="39" cssClass="card-attr" verticalAlignment="center" orientation="horizontal">
-              <label text="&#xf041;" col="0" cssClass="fa" />
+          <StackLayout row="2" className="card-footer" visibility="{{ trader.stand ? 'visible' : 'collapsed' }}">
+            <GridLayout rows="*" columns="18, *, 50" height="39" className="card-attr" verticalAlignment="center" orientation="horizontal">
+              <label text="&#xf041;" col="0" className="fa" />
               <label text="{{ trader.stand }}" col="1" />
               <StackLayout col="2" height="39" width="50" verticalAlignment="center" tap="{{ setTraderAsFavourite }}">
-                <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" cssClass="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
+                <label text="{{ isFavourite ? '&#xf005;' : '&#xf006;' }}" className="{{ isFavourite ? 'fa isFavTrue' : 'fa isFavFalse' }}" horizontalAlignment="center" fontSize="24" />
               </StackLayout>
             </GridLayout>
           </StackLayout>
@@ -59,7 +59,7 @@
     </lv:RadListView.itemTemplate><!--
     <lv:RadListView.headerItemTemplate>
       <GridLayout paddingTop="15" rows="40">
-        <StackLayout row="0" verticalAlignment="center" height="40" cssClass="card-separate-head">
+        <StackLayout row="0" verticalAlignment="center" height="40" className="card-separate-head">
           <label text="{{ exhibitorsCount + ' AUSSTELLER' }}" />
         </StackLayout>
       </GridLayout>

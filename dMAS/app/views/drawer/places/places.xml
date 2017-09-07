@@ -1,0 +1,50 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+  xmlns:sdc="views/side-drawer-content"
+  xmlns:Card="nativescript-cardview"
+  xmlns:IC="nativescript-web-image-cache"
+  navigatingTo="navigatingTo" 
+  ios:actionBarHidden="true"
+  actionBarHidden="true">
+
+  <drawer:RadSideDrawer id="sideDrawer" drawerSize="250">
+    <drawer:RadSideDrawer.drawerContent>
+      <sdc:side-drawer-content />
+    </drawer:RadSideDrawer.drawerContent>
+    <drawer:RadSideDrawer.mainContent>
+      <GridLayout rows="50, *">
+        <GridLayout row="0" className="header-actionbar" columns="50, *, 50">
+          <StackLayout col="0" verticalAlignment="center">
+            <Button text="&#xf0c9;" className="fa" tap="{{ showSlideout }}" />
+          </StackLayout>
+          <StackLayout col="1" verticalAlignment="center">
+            <Label text="{{ event.name }}" horizontalAlignment="center" />
+          </StackLayout>
+        </GridLayout>
+        <GridLayout row="1">
+          <GridLayout rows="*, 100" columns="*">
+            <GridLayout row="0" rows="180, auto" className="empty-list" horizontalAlignment="center" visibility="{{ (event_places.length == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+              <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+                <Android>
+                  <image src="~/images/empty-man.png" stretch="none" />
+                </Android>
+                <iOS>
+                  <image src="res://worker" stretch="none" />
+                </iOS>
+              </StackLayout>
+              <Label row="1" text="Leider gibt es in dieser Kategorie keine Veranstaltungen" textWrap="true" />
+            </GridLayout>
+            
+            <StackLayout rowSpan="2" id="test"></StackLayout>
+
+            <StackLayout row="1" verticalAlignment="bottom" visibility="{{ (event_places.length > 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+              <Button text="Detailansicht" tap="{{ openDetailView }}" className="btn" margin="10 10 10 10" />
+            </StackLayout>
+
+            <ActivityIndicator rowSpan="2" busy="{{ isLoading }}" />
+          </GridLayout>
+        </GridLayout>
+      </GridLayout>
+    </drawer:RadSideDrawer.mainContent>
+  </drawer:RadSideDrawer>
+</Page>

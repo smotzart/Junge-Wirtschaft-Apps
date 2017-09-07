@@ -1,0 +1,38 @@
+.drawer {
+  background-color: white;
+}
+.drawer-top {
+  height: 50;
+  font-size: 20;
+}
+.drawer-top button {
+  color: #5d5d5d;
+  border-width: 1;
+  border-color: white;
+  background-color: white;
+}
+.drawer-button {
+  color: #5d5d5d;
+  font-size: 14;
+  font-family: 'SourceSansPro-Semibold';
+  text-transform: uppercase;
+  height: 40;
+  padding-left: 20;
+  border-width: 1;
+  border-color: white;
+  background-color: white;
+  text-align: left;
+}
+
+.drawer-button:highlighted,
+.drawer-button-active {
+  color: white;
+  background-color: #d0021b;
+  border-width: 1;
+  border-color: #d0021b;
+}
+
+.drawer-devider {
+  background-color: #ececec;
+  opacity: 0.5;
+}

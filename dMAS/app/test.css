@@ -247,7 +247,8 @@ SearchBar {
     font-size: 20;
 }
 .header-actionbar Button {
-    border-width: 0;
+    border-width: 1;
+    border-color: #d0021b;
     border-radius: 0;
     background-color: transparent;
 }

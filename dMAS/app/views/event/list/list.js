@@ -9,6 +9,7 @@ var page;
 
 function navigatingTo(args) {
   page = args.object;
+  
   if (!Sqlite.exists("messewels.db")) {
     Sqlite.copyDatabase("messewels.db");
   }

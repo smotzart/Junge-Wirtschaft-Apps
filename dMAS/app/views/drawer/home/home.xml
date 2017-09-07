@@ -1,0 +1,87 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:nsDrawer="nativescript-telerik-ui/sidedrawer" 
+  xmlns:sdc="views/side-drawer-content"
+  xmlns:Card="nativescript-cardview"
+  xmlns:IC="nativescript-web-image-cache"
+  navigatingTo="navigatingTo" 
+  backgroundSpanUnderStatusBar="true"
+  ios:actionBarHidden="true"
+  actionBarHidden="true">
+
+  <nsDrawer:RadSideDrawer id="sideDrawer" drawerSize="250">
+    <nsDrawer:RadSideDrawer.drawerContent>
+      <sdc:side-drawer-content />
+    </nsDrawer:RadSideDrawer.drawerContent>
+    <nsDrawer:RadSideDrawer.mainContent>
+      <GridLayout rows="50, *">
+        <GridLayout row="0" className="header-actionbar" columns="50, *, 50">
+          <StackLayout col="0" verticalAlignment="center">
+            <Button text="&#xf0c9;" className="fa" tap="{{ showSlideout }}" />
+          </StackLayout>
+          <StackLayout col="1" verticalAlignment="center">
+            <Label text="{{ event.name }}" horizontalAlignment="center" />
+          </StackLayout>
+        </GridLayout>
+        <GridLayout row="1">
+          <ScrollView>
+            <GridLayout rows="*">
+              <StackLayout row="0">
+                <Card:CardView className="card card-header" elevation="7" radius="1">
+                  <GridLayout margin="0" rows="124, auto" columns="*" >
+                    <StackLayout row="0" className="bg-placeholder">
+                      <IC:WebImage height="124" stretch="aspectFill" src="{{ event.banner_url }}"></IC:WebImage> 
+                    </StackLayout>
+                    <StackLayout row="1" tap="goToInfoPage" padding="20 22 20 22" visibility="{{ event.description ? 'visible' : 'collapsed' }}">
+                      <Label textWrap="true" className="head-label">
+                        <Label.formattedText>
+                          <FormattedString>
+                            <FormattedString.spans>
+                              <Span text="{{ event.description | textTruncate(100) }}"/>
+                              <Span text=" Mehr ›" fontSize="14" fontFamily="karmina" foregroundColor="#0d5775" visibility="{{ event.description.length > 100 ? 'visible' : 'collapsed' }}"/>
+                            </FormattedString.spans>
+                          </FormattedString>
+                        </Label.formattedText>
+                      </Label>
+                    </StackLayout>
+                  </GridLayout>
+                </Card:CardView>
+                <Card:CardView className="card card-wide card-date" elevation="7" radius="1" visibility="{{ ( event_start || event_end ) ? 'visible' : 'collapsed' }}">
+                  <StackLayout height="69" verticalAlignment="center" orientation="horizontal">
+                    <label text="&#xf073;" className="fa" />
+                    <label text="{{ event_start + ' - ' + event_end }}" />
+                  </StackLayout>
+                </Card:CardView>
+                <Card:CardView className="card card-text" elevation="7" radius="3" visibility="{{ event.route ? 'visible' : 'collapsed' }}">
+                  <GridLayout rows="25, *" columns="*">
+                    <Label row="0" className="card-title" text="ANFAHRT" />
+                    <StackLayout row="1" className="card-body">
+                      <Label className="last" textWrap="true" text="{{ event.route }}" />
+                    </StackLayout>
+                  </GridLayout>
+                </Card:CardView>
+                <Button text="Jetzt als Besucher zur Messe anmelden" tap="{{ openTicketUrl }}" className="btn" margin="0 6 25 6" />
+                <Card:CardView className="card card-text" elevation="7" radius="3" visibility="{{ event.location_details ? 'visible' : 'collapsed' }}">
+                  <GridLayout rows="25, *" columns="*">
+                    <Label row="0" className="card-title" text="LOCATION" />
+                    <StackLayout row="1" className="card-body">
+                      <Label className="last" textWrap="true" text="{{ event.location_details }}" />
+                    </StackLayout>
+                  </GridLayout>
+                </Card:CardView>        
+                <Card:CardView className="card card-text" elevation="7" radius="3">
+                  <GridLayout rows="25, *" columns="*">
+                    <Label row="0" className="card-title" text="ADRESSE" />
+                    <StackLayout row="1" className="card-body card-body-address">
+                      <Label textWrap="true" text="{{ event.zip + ' ' + event.city }}" />
+                      <Label textWrap="true" text="{{ event.country | countryName() }}" />
+                    </StackLayout>
+                  </GridLayout>
+                </Card:CardView>
+              </StackLayout>
+            </GridLayout>
+          </ScrollView>
+        </GridLayout>
+      </GridLayout>
+    </nsDrawer:RadSideDrawer.mainContent>
+  </nsDrawer:RadSideDrawer>
+</Page>

@@ -5,8 +5,10 @@ var Base            = require("~/components/common/base-view-model");
 var Trade           = require("~/views/event/trader/trader-model");
 var Action          = require("~/views/event/program/program-model");
 var Nav             = require("~/utils/navigation/navigation");
+var dialogs         = require("ui/dialogs");
 var Service         = require("~/utils/service/service");
 var viewsModule     = require("~/utils/views/views");
+var frame           = require("tns-core-modules/ui/frame");
 var Utils           = require("utils/utils");
 var moment          = require('moment');
 var timer           = require("timer");
@@ -289,9 +291,18 @@ var DetailShortModel = (function (_super) {
       _this.endLoading();
     }, 1500);
   };  
+  DetailShortModel.prototype.goToList = function (args) {
+    Nav.navigate({
+      moduleName: viewsModule.Views.eventList
+    });
+  };
+  DetailShortModel.prototype.showSlideout = function (args) {
+    var sideDrawer = frame.topmost().getViewById("sideDrawer");
+    sideDrawer.toggleDrawerState();
+  };
   DetailShortModel.prototype.goToEventView = function (args) {
     Nav.navigate({
-      moduleName: viewsModule.Views.eventView,
+      moduleName: 'views/drawer/home/home', //viewsModule.Views.eventView
       context: args.view.bindingContext,
     });
   };
@@ -432,10 +443,14 @@ var DetailShortModel = (function (_super) {
     }
   };
   DetailShortModel.prototype.onTraderItemTap = function (args) {
-     Nav.navigate({
+    Nav.navigate({
+      moduleName: viewsModule.Views.traderView,
+      context: args.view.bindingContext,
+    });
+    /*Nav.navigate({
       moduleName: viewsModule.Views.traderView,
       context: (this.traders_view.items).getItem(args.itemIndex)
-    });
+    });*/
   };
 
   
@@ -537,7 +552,8 @@ var DetailShortModel = (function (_super) {
   DetailShortModel.prototype.onActionItemTap = function (args) {
     Nav.navigate({
       moduleName: viewsModule.Views.programView,
-      context: (this.actions_view.items).getItem(args.itemIndex)
+      context: args.view.bindingContext
+      //context: (this.actions_view.items).getItem(args.itemIndex)
     });
   };
 

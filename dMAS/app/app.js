@@ -13,11 +13,8 @@ var googleAnalytics   = require("nativescript-google-analytics");
 
 updateData();
 
-applicationModule.mainEntry = {
-  moduleName: viewsModule.Views.eventList
-};
-
 if (applicationModule.ios) {
+  GMSServices.provideAPIKey("AIzaSyCAqVdCIMIbndLMZVz2_4PCRJqY2F-p1Z8");
   //iOS 
   var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -54,27 +51,23 @@ applicationModule.on(applicationModule.launchEvent, function(args) {
   }
 });
 
-var textTruncate = function(value, length) {
-  return value.length > length ? value.substring(0, length - 3) + "..." : value;
-}
-
-var countryName = function(value) {
+applicationModule.setResources("countryName", function(value) {
   return countryModule.countries[value];
-}
-
-var uppercase = function(value) {
+});
+applicationModule.setResources("textTruncate", function(value, length) {
+  return value.length > length ? value.substring(0, length - 3) + "..." : value;
+});
+applicationModule.setResources("uppercase", function(value) {
   return value.toUpperCase();
-}
+});
 
-applicationModule.resources["countryName"]  = countryName;
-applicationModule.resources["textTruncate"] = textTruncate;
-applicationModule.resources["uppercase"]    = uppercase;
-
-applicationModule.start();
+applicationModule.start({
+  moduleName: "views/drawer/maps/maps"//viewsModule.Views.eventList // //testView
+});
 
 function initAnalytics(){
   googleAnalytics.initalize({
-    trackingId: "UA-XXXXXXXX-1", //YOUR Id from GA 
+    trackingId: "UA-40191066-4", //YOUR Id from GA 
     //userId: "9ac7a034-ffde-4783-8374-f78b3df39d32", //Optional 
     dispatchInterval: 5,
     logging: {

@@ -1,13 +1,13 @@
 <ScrollView xmlns:Card="nativescript-cardview" xmlns:IC="nativescript-web-image-cache">
   <GridLayout rows="*">
     <StackLayout row="0">
-      <Card:CardView cssClass="card card-header" elevation="7" radius="1">
+      <Card:CardView className="card card-header" elevation="7" radius="1">
         <GridLayout margin="0" rows="124, auto" columns="*" >
-          <StackLayout row="0" cssClass="bg-placeholder">
+          <StackLayout row="0" className="bg-placeholder">
             <IC:WebImage height="124" stretch="aspectFill" src="{{ event.banner_url }}"></IC:WebImage> 
           </StackLayout>
           <StackLayout row="1" padding="20 22 20 22" visibility="{{ event.description ? 'visible' : 'collapsed' }}">
-            <Label textWrap="true" cssClass="head-label">
+            <Label textWrap="true" className="head-label">
               <Label.formattedText>
                 <FormattedString>
                   <FormattedString.spans>
@@ -20,33 +20,33 @@
           </StackLayout>
         </GridLayout>
       </Card:CardView>
-      <Card:CardView cssClass="card card-wide card-date" elevation="7" radius="1" visibility="{{ ( event_start || event_end ) ? 'visible' : 'collapsed' }}">
+      <Card:CardView className="card card-wide card-date" elevation="7" radius="1" visibility="{{ ( event_start || event_end ) ? 'visible' : 'collapsed' }}">
         <StackLayout height="69" verticalAlignment="center" orientation="horizontal">
-          <label text="&#xf073;" cssClass="fa" />
+          <label text="&#xf073;" className="fa" />
           <label text="{{ event_start + ' - ' + event_end }}" />
         </StackLayout>
       </Card:CardView>
-      <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ event.route ? 'visible' : 'collapsed' }}">
+      <Card:CardView className="card card-text" elevation="7" radius="3" visibility="{{ event.route ? 'visible' : 'collapsed' }}">
         <GridLayout rows="25, *" columns="*">
-          <Label row="0" cssClass="card-title" text="ANFAHRT" />
-          <StackLayout row="1" cssClass="card-body">
-            <Label cssClass="last" textWrap="true" text="{{ event.route }}" />
+          <Label row="0" className="card-title" text="ANFAHRT" />
+          <StackLayout row="1" className="card-body">
+            <Label className="last" textWrap="true" text="{{ event.route }}" />
           </StackLayout>
         </GridLayout>
       </Card:CardView>
-      <Button text="Jetzt als Besucher zur Messe anmelden" tap="{{ openTicketUrl }}" cssClass="btn" margin="0 6 25 6" />
-      <Card:CardView cssClass="card card-text" elevation="7" radius="3" visibility="{{ event.location_details ? 'visible' : 'collapsed' }}">
+      <Button text="Jetzt als Besucher zur Messe anmelden" tap="{{ openTicketUrl }}" className="btn" margin="0 6 25 6" />
+      <Card:CardView className="card card-text" elevation="7" radius="3" visibility="{{ event.location_details ? 'visible' : 'collapsed' }}">
         <GridLayout rows="25, *" columns="*">
-          <Label row="0" cssClass="card-title" text="LOCATION" />
-          <StackLayout row="1" cssClass="card-body">
-            <Label cssClass="last" textWrap="true" text="{{ event.location_details }}" />
+          <Label row="0" className="card-title" text="LOCATION" />
+          <StackLayout row="1" className="card-body">
+            <Label className="last" textWrap="true" text="{{ event.location_details }}" />
           </StackLayout>
         </GridLayout>
       </Card:CardView>        
-      <Card:CardView cssClass="card card-text" elevation="7" radius="3">
+      <Card:CardView className="card card-text" elevation="7" radius="3">
         <GridLayout rows="25, *" columns="*">
-          <Label row="0" cssClass="card-title" text="ADRESSE" />
-          <StackLayout row="1" cssClass="card-body card-body-address">
+          <Label row="0" className="card-title" text="ADRESSE" />
+          <StackLayout row="1" className="card-body card-body-address">
             <Label textWrap="true" text="{{ event.zip + ' ' + event.city }}" />
             <Label textWrap="true" text="{{ event.country | countryName() }}" />
           </StackLayout>

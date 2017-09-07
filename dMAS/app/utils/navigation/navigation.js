@@ -1,5 +1,5 @@
 "use strict";
-var frameModule = require("ui/frame");
+var frameModule = require("tns-core-modules/ui/frame");
 frameModule.Frame.defaultTransition = {
   name: "slideLeft"
 }
@@ -15,3 +15,19 @@ function goBack() {
   topmost.goBack();
 }
 exports.goBack = goBack;
+
+function openPage(view) {
+  var url = view.tag;
+  //alert(view.page.bindingContext);
+  //return;
+  var topmost = frameModule.topmost();
+  if (url) {
+    if (topmost.currentEntry.moduleName !== url) {
+      topmost.navigate({
+        moduleName: url,
+        context: view.page.bindingContext
+      });
+    }
+  }
+}
+exports.openPage = openPage;

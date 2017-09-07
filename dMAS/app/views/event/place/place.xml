@@ -1,14 +1,14 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:IC="nativescript-web-image-cache" backgroundColor="#f4f4f4" actionBarHidden="true" shownModally="onShownModally" loaded="onLoaded" unloaded="onUnloaded">
     <GridLayout rows="50, *">
-        <GridLayout row="0" cssClass="header-actionbar" columns="50, *, 50">
+        <GridLayout row="0" className="header-actionbar" columns="50, *, 50">
             <StackLayout col="1" verticalAlignment="center">
                 <Label text="{{ place_name }}" horizontalAlignment="center" />
             </StackLayout>
             <StackLayout col="2" verticalAlignment="center">
-                <Button text="&#xf00d;" cssClass="fa" tap="closeModally" />
+                <Button text="&#xf00d;" className="fa" tap="closeModally" />
             </StackLayout>
         </GridLayout>
-        <GridLayout row="1" rows="*" columns="*" pan="onPan" pinch="onPinch" doubleTap="onDoubleTap" cssClass="bg-placeholder">
+        <GridLayout row="1" rows="*" columns="*" pan="onPan" pinch="onPinch" doubleTap="onDoubleTap" className="bg-placeholder">
             <IC:WebImage row="0" col="0" stretch="aspectFill" src="{{ place_image }}" id="item"></IC:WebImage>
         </GridLayout>
     </GridLayout>

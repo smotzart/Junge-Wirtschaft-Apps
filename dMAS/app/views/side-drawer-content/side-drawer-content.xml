@@ -20,8 +20,6 @@
       <Button text="Messeplan" tag="views/drawer/places/places" tap="openPage" className="{{ (menuIndex == 6) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
       <GridLayout rows="1" className="drawer-devider"></GridLayout>
       <Button text="Impressum" tag="views/drawer/imprint/imprint" tap="openPage" className="{{ (menuIndex == 7) ? 'drawer-button drawer-button-active' : 'drawer-button' }}" />
-      <GridLayout rows="1" className="drawer-devider"></GridLayout>
-      <Button text="Maps" tag="views/drawer/maps/maps" tap="openPage"  />
     </StackLayout>
   </GridLayout>
   

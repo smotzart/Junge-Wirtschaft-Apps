@@ -27,9 +27,9 @@
 .drawer-button:highlighted,
 .drawer-button-active {
   color: white;
-  background-color: #d0021b;
+  background-color: #ee6f06;
   border-width: 1;
-  border-color: #d0021b;
+  border-color: #ee6f06;
 }
 
 .drawer-devider {

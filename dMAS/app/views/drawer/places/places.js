@@ -1,27 +1,40 @@
 "use strict";
 var viewModel;
 
-var item;
-var places;
-var place_view;
-
-var app         = require("application");
-var timer       = require("timer");
-var TabView     = require("ui/tab-view");
-var imageModule = require("ui/image");
-var stackLayout = require("ui/layouts/stack-layout");
-var segmentedBarModule = require("ui/segmented-bar");
-
 var navigationModule = require("~/utils/navigation/navigation");
 var frame = require("tns-core-modules/ui/frame");
 
+var vmModule    = require("~/views/drawer/maps/maps-view-model");
+var mapsModule  = require("nativescript-google-maps-sdk");
+var utils = require("utils/utils");
+
+var markers = [
+  [0.014934539625812857, -0.020084381103515625],
+  [0.007381439188572252, -0.010814666748046875],
+  [0.005493164054094371, 0.012531280517578125],
+  [-0.003948211666792128, 0.023860931396484375],
+  [-0.006694793685938815, 0.023860931396484375],
+  [-0.009269714315022413, 0.023345947265625],
+  [-0.023517607982212068, 0.01064300537109375],
+  [-0.016479491960279726, 0.0034332275390625],
+  [-0.006523132310124609, -0.00858306884765625],
+  [-0.0061798095583308075, -0.020084381103515625],
+  [-0.009956359813164905, -0.020084381103515625],
+  [0.015964507850075714, 0.034503936767578125],
+  [0.01836776701937846, 0.023174285888671875],
+];
+
 function navigatingTo(args) {
   var page = args.object;
-  place_view = page.getViewById("test");
   viewModel = page.navigationContext;
   viewModel.menuIndex = 6;
-  viewModel.loadPlaces();
-  buildTabs();
+  viewModel.latitude  = vmModule.mainViewModel.latitude; 
+	viewModel.longitude = vmModule.mainViewModel.longitude;
+  viewModel.zoom      = vmModule.mainViewModel.zoom; 
+	viewModel.bearing   = vmModule.mainViewModel.bearing;
+	viewModel.tilt      = vmModule.mainViewModel.tilt; 
+  viewModel.padding   = vmModule.mainViewModel.padding; 
+
   page.bindingContext = null;
   page.bindingContext = viewModel;
 }
@@ -32,67 +45,68 @@ function goBack(args) {
 }
 exports.goBack = goBack;
 
-/*
-function showSlideout(args) {
-  var sideDrawer = frame.topmost().getViewById("sideDrawer");
-  sideDrawer.toggleDrawerState();
-}
-exports.showSlideout = showSlideout;*/
 
+var mapView = null;
 
-function buildTabs() {
-  timer.setTimeout(() => {   
-    places = viewModel.event_places;
-    if (places.length < 1) {
+function onMapReady(args) {
+  mapView = args.object;
+  
+  mapView.settings.compassEnabled = false;
+  mapView.settings.rotateGesturesEnabled = false;
+  mapView.gMap.setMinZoomPreference(13);
+  mapView.gMap.setMaxZoomPreference(15);
+  mapView.gMap.setMapType(mapView.gMap.MAP_TYPE_NONE);
+
+  // create overlay
+  var overlay = new com.google.android.gms.maps.model.GroundOverlayOptions();
+  // get image resource ID
+  var img_id = utils.ad.resources.getDrawableId('hallenplan');
+  // set overlay image  
+  overlay.image(new com.google.android.gms.maps.model.BitmapDescriptorFactory.fromResource(img_id));
+  // set overlay position
+  overlay.position(new com.google.android.gms.maps.model.LatLng(0, 0), 10000);
+  var result = mapView.gMap.addGroundOverlay(overlay);
+  var overlay_bounds = result.getBounds();
+  var overlay_center = overlay_bounds.getCenter();
+ 
+  mapView.gMap.setLatLngBoundsForCameraTarget(overlay_bounds);
+
+  var lastValidCenter = overlay_center;
+  mapView.gMap.setOnCameraChangeListener(new com.google.android.gms.maps.GoogleMap.OnCameraChangeListener({
+    onCameraChange: function(position) {
       return;
-    }
-    place_view.removeChildren();
-    if (app.ios) {
-      var segmentedBar = new segmentedBarModule.SegmentedBar();
-      var segmentedItems = [];
-      for (var i = 0; i < places.length; i++) {
-        var item_ = new segmentedBarModule.SegmentedBarItem();
-        item_.title = places[i].title;
-        segmentedItems.push(item_);
-      }
-      segmentedBar.items = segmentedItems;   
-      segmentedBar.cssClass = 'ios-segmented-bar';
-      segmentedBar.selectedIndex = 0;
-      segmentedBar.id = "olo";
-      place_view.addChild(segmentedBar);
+      var bounds = mapView.gMap.getProjection().getVisibleRegion().latLngBounds;
+      //alert(bounds);
+      /*mapView.gMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions()
+        .position(new com.google.android.gms.maps.model.LatLng(bounds.northeast.latitude, bounds.northeast.longitude))
+      );
+      mapView.gMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions()
+        .position(new com.google.android.gms.maps.model.LatLng(bounds.southwest.latitude, bounds.southwest.longitude))
+      );*/
+      lastValidCenter = bounds //new com.google.android.gms.maps.model.LatLng(position.target.latitude, position.target.longitude);
 
-      var stL =  new stackLayout.StackLayout();
-      var img = new imageModule.Image();
-      img.src = places[segmentedBar.selectedIndex].file_url;
-      img.stretch = "aspectFill";
-      stL.addChild(img);
-      place_view.addChild(stL);
-
-      segmentedBar.on(segmentedBarModule.SegmentedBar.selectedIndexChangedEvent, function (args) {
-        img.src = places[args.newIndex].file_url;
-      });
-
-    }
-    if (app.android) {
-      var tabView_    = new TabView.TabView();
-      tabView_.items = new Array();
-      for (var i = 0; i < places.length; i++) {
-        var stL =  new stackLayout.StackLayout();
-        var img = new imageModule.Image();
-        img.src = places[i].file_url;
-        img.stretch = "aspectFill";
-        stL.addChild(img);
-        var tabEntry = {
-          title: places[i].title,
-          view: stL
+      if (
+        (bounds.northeast.latitude < overlay_bounds.northeast.latitude) && 
+        (bounds.northeast.longitude < overlay_bounds.northeast.longitude) && 
+        (bounds.southwest.latitude > overlay_bounds.southwest.latitude) &&
+        (bounds.southwest.longitude > overlay_bounds.southwest.longitude)
+      ) {
+          return;
         }
-        tabView_.items.push(tabEntry);
-      }
-      tabView_.tabsBackgroundColor = "white"; 
-      tabView_.selectedColor = "#d0021b"; 
-      tabView_.selectedIndex = 0;
-      tabView_.id = "olo";
-      place_view.addChild(tabView_);
+      mapView.setViewport(lastValidCenter);
+      //alert(lastValidCenter);
+      //mapView.gMap.animateCamera(new com.google.android.gms.maps.CameraUpdateFactory.newCameraPosition(lastValidCenter));
     }
-  }, 3000);
+  }));
+
+  
+  for (var i = 0; i < markers.length; i++) {
+    mapView.gMap.addMarker(new com.google.android.gms.maps.model.MarkerOptions()
+      .position(new com.google.android.gms.maps.model.LatLng(markers[i][0], markers[i][1]))
+      .title("Marker place - " + i)
+      .snippet("Marker place information - " + i)
+    );
+  }
 }
+
+exports.onMapReady = onMapReady;

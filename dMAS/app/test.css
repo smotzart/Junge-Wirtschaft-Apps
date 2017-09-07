@@ -235,12 +235,12 @@ SearchBar {
 .card-date .fa,
 .card-program .time-from,
 .person-name {
-    color: #d0021b;
+    color: #ee6f06;
 }
 .header-actionbar,
 .card-actionbar,
 .selectedBarItemBottomBorder {
-    background-color: #d0021b;
+    background-color: #ee6f06;
 }
 .header-actionbar {
     color: #ffffff;
@@ -248,7 +248,7 @@ SearchBar {
 }
 .header-actionbar Button {
     border-width: 1;
-    border-color: #d0021b;
+    border-color: #ee6f06;
     border-radius: 0;
     background-color: transparent;
 }

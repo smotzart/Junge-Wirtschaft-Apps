@@ -11,7 +11,7 @@
       </StackLayout>
     </GridLayout>
     <GridLayout row="1">
-      <TabView tabBackgroundColor="#ffffff" androidSelectedTabHighlightColor="#d0021b" selectedTabTextColor="#d0021b" selectedIndex="0" selectedIndexChanged="onSelectedIndexChanged">
+      <TabView tabBackgroundColor="#ffffff" androidSelectedTabHighlightColor="#ee6f06" selectedTabTextColor="#ee6f06" selectedIndex="0" selectedIndexChanged="onSelectedIndexChanged">
         <TabView.items>
           <TabViewItem title="Alle" xmlns:AllTab="tabs/list">
             <TabViewItem.view>

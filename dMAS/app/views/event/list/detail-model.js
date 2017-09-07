@@ -310,7 +310,7 @@ var DetailShortModel = (function (_super) {
     alert("productTap");
   };
   DetailShortModel.prototype.openTicketUrl = function () {     
-    return Utils.openUrl("http://www.oeticket.com/Tickets.html?affiliate=EOE&doc=artistPages%2Ftickets&fun=artist&action=tickets&erid=1759044&includeOnlybookable=false&xtmc=fishing_festival&xtnp=1&xtcr=1");
+    return Utils.openUrl("https://online.wkooe.at/web/guest/extteilnehmerportal?fsc_lectkeys=WKO_2017_3256");
   };
   DetailShortModel.prototype.loadProducts = function () {
     var _this = this;

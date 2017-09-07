@@ -132,7 +132,7 @@ var Service = (function () {
       if (Connectivity.getConnectionType() === Connectivity.connectionType.none) {
         return false;
       }/*
-      return fetch("https://login.dmas.at/api/v5/ios/events.json?presenter_id=58")
+      return fetch("https://login.dmas.at/api/v5/ios/events.json?presenter_id=122400")
         .then(handleErrors)
         .then(function(response) {
           return response.json();

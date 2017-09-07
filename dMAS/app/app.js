@@ -62,7 +62,7 @@ applicationModule.setResources("uppercase", function(value) {
 });
 
 applicationModule.start({
-  moduleName: "views/drawer/maps/maps"//viewsModule.Views.eventList // //testView
+  moduleName: viewsModule.Views.eventList //"views/drawer/maps/maps"// //testView//
 });
 
 function initAnalytics(){
@@ -89,7 +89,7 @@ function updateData() {
     return false;
   } else {
     appSettings.setString("update_date", currentDate.toString());
-    return fetch("https://login.dmas.at/api/v5/ios/events.json?presenter_id=58")
+    return fetch("https://login.dmas.at/api/v5/ios/events.json?presenter_id=122400")
       .then(handleErrors)
       .then(function(response) {
         return response.json();

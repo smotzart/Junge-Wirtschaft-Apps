@@ -10,10 +10,7 @@
         tilt="{{ tilt }}" 
         i-padding="50,50,50,50" 
         padding="{{ padding }}" 
-        mapReady="onMapReady" /> 
-        <!--markerSelect="onMarkerEvent" markerBeginDragging="onMarkerEvent"
-        markerEndDragging="onMarkerEvent" markerDrag="onMarkerEvent"
-        markerInfoWindowTapped="onMarkerEvent" coordinateTapped="onCoordinateTapped"
-        cameraChanged="onCameraChanged -->
+        mapReady="onMapReady"
+         /> 
   </GridLayout>
 </Page>

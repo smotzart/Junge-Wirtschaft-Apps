@@ -9,9 +9,12 @@ var Timer         = require("timer");
 
 var ListModel = (function (_super) {
   __extends(ListModel, _super);
+
+  var refresh_i;
   function ListModel() {
     _super.call(this);
     this._selectedCat = 0;
+    this.refresh_i = 0;
   }
   Object.defineProperty(ListModel.prototype, "events", {
     get: function () {
@@ -57,8 +60,9 @@ var ListModel = (function (_super) {
     var getEvents = Service.service.getEventsByCat(_this.selectedCat);
     getEvents.then(function (data) {
       Timer.setTimeout(() => {
-        if (data.length == 0 && _this.selectedCat == 0) {
+        if (data.length == 0 && _this.selectedCat == 0 && _this.refresh_i < 15) {
           _this.refresh();
+          _this.refresh_i++;
         }
         var events = new Array();
         var month  = 0;

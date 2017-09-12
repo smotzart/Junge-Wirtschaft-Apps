@@ -1,0 +1,50 @@
+<GridLayout rows="*" xmlns:Card="nativescript-cardview" xmlns:IC="nativescript-web-image-cache">
+  <GridLayout row="0" rows="180, auto" className="empty-list" horizontalAlignment="center" visibility="{{ (events_count == 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+    <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
+      <Android><image src="~/images/empty-man.png" stretch="none" /></Android>
+      <iOS><image src="res://worker" stretch="none" /></iOS>
+    </StackLayout>
+    <Label row="1" text="Leider gibt es in dieser Kategorie keine Veranstaltungen" textWrap="true" />
+  </GridLayout>
+  <ListView items="{{ events }}" row="0" itemTemplateSelector="month ? 'month' : 'card'" ios:itemLoading="itemLoading" visibility="{{ (events_count > 0 && !isLoading) ? 'visible' : 'collapsed' }}">
+    <ListView.itemTemplates>
+      <template key="month">
+        <GridLayout rows="40" paddingTop="20" className="card-separate-head" paddingLeft="10">
+          <StackLayout height="40" verticalAlignment="center">
+            <label text="{{ month }}" />
+          </StackLayout>
+        </GridLayout>
+      </template>
+      <template key="card">
+        <Card:CardView className="card card-wide card-event" elevation="7" radius="1" tap="{{ goToEventView }}">
+          <GridLayout rows="124, auto" columns="*">
+            <StackLayout row="0" className="bg-placeholder">
+              <IC:WebImage height="124" stretch="aspectFill" src="{{ event.banner_url }}"></IC:WebImage> 
+            </StackLayout>
+            <GridLayout row="1" rows="20, auto, auto, auto" columns="*, *" className="inner">
+              <StackLayout className="card-attr" row="0" colSpan="2" verticalAlignment="center">
+                <label text="{{ event_start + ' - ' + event_end }}" textWrap="true" />
+              </StackLayout>
+              <StackLayout row="1" colSpan="2" verticalAlignment="center">
+                <label text="{{ event.name | dateConverter(dateFormat) }}" className="h2" textWrap="false" />
+                <label text="{{ event.description }}" className="card-subhead" textWrap="true" visibility="{{ event.description ? 'visible' : 'collapsed' }}" />
+              </StackLayout>
+              <StackLayout row="2" colSpan="2" className="card-hr" visibility="{{ (event.place || event.category) ? 'visible' : 'collapsed' }}" />
+              <GridLayout row="3" colSpan="2" columns="*, *">
+                <GridLayout columns="18, *" className="card-attr" col="0" verticalAlignment="center" orientation="horizontal" visibility="{{ event.place ? 'visible' : 'collapsed' }}">
+                  <label col="0" text="&#xf041;" className="fa" />
+                  <label col="1" text="{{ event.place }}" />
+                </GridLayout>
+                <GridLayout columns="18, *" className="card-attr" col="1" verticalAlignment="center" orientation="horizontal" visibility="{{ event.category ? 'visible' : 'collapsed' }}">
+                  <label col="0" text="&#xf02b;" className="fa" />
+                  <label col="1" text="{{ event.category }}" />
+                </GridLayout>
+              </GridLayout>
+            </GridLayout>
+          </GridLayout>
+        </Card:CardView>
+      </template>
+    </ListView.itemTemplates>
+  </ListView>
+  <ActivityIndicator busy="{{ isLoading }}" />
+</GridLayout>

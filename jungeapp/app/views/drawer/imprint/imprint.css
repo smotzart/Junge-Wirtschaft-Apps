@@ -1,0 +1,19 @@
+.content-page {
+  padding: 20 10;
+  font-size: 14;
+}
+.content-page .bold {
+  font-size: 15;
+}
+.content-page > StackLayout {
+  margin: 0 0 15 0;
+}
+.content-page .display2 {
+  font-size: 20;
+}
+.content-page .display3 {
+  font-size: 18;
+}
+.content-page .link {
+  color: #ee6f06;
+}

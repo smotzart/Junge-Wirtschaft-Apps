@@ -1,0 +1,118 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+  xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+  xmlns:sdc="views/side-drawer-content"
+  loaded="pageLoad" 
+  ios:actionBarHidden="true"
+  actionBarHidden="true">
+
+  <drawer:RadSideDrawer id="sideDrawer" tag="1" drawerSize="200">
+    <drawer:RadSideDrawer.drawerContent>
+      <sdc:side-drawer-content />
+    </drawer:RadSideDrawer.drawerContent>
+    <drawer:RadSideDrawer.mainContent>
+      <GridLayout rows="50, *">
+        <GridLayout row="0" className="header-actionbar" columns="50, *, 50">
+          <StackLayout col="0" verticalAlignment="center">
+            <Button text="&#xf0c9;" className="fa" tap="{{ showSlideout }}" />
+          </StackLayout>
+          <StackLayout col="1" verticalAlignment="center">
+            <Label text="{{ event.name }}" horizontalAlignment="center" />
+          </StackLayout>
+        </GridLayout>
+        <GridLayout row="1">
+          <ScrollView>
+            <StackLayout className="content-page">
+              <StackLayout>
+                <Label text="dMAS GmbH" className="bold display2" textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Eisenhowerstraße 27" textWrap="true" />
+                <Label text="A-4600 Wels, Austria" textWrap="true" />
+                <Label text="Tel.: +43 (0) 7242 21 40 14" textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label textWrap="true">
+                  <Label.formattedText>
+                    <FormattedString>
+                      <FormattedString.spans>
+                        <Span text="Mail: "/>
+                        <Span text="office@dmas.at" className="link" />
+                      </FormattedString.spans>
+                    </FormattedString>
+                  </Label.formattedText>
+                </Label>
+                <Label textWrap="true">
+                  <Label.formattedText>
+                    <FormattedString>
+                      <FormattedString.spans>
+                        <Span text="Web: "/>
+                        <Span text="www.dmas.at" className="link" />
+                      </FormattedString.spans>
+                    </FormattedString>
+                  </Label.formattedText>
+                </Label>
+              </StackLayout>
+              <StackLayout>
+                <Label text="Firmendaten:" className="bold" textWrap="true" />
+                <Label text="Firmenbuchnummer: FN 447257 g" textWrap="true" />
+                <Label text="UID: ATU70307759" textWrap="true" />
+                <Label text="Firmenbuchgericht: Landesgericht Wels" textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Fachgruppe: IT-Dienstleistung" textWrap="true" />
+                <Label text="Kammerzugehörigkeit: Wirtschaftskammer Oberösterreich" textWrap="true" />
+                <Label text="ATU70307759" textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Geschäftsführung:" textWrap="true" />
+                <Label text="Markus Tückmantel" textWrap="true" />
+                <Label text="Clemens Stübler" textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Datenschutzerklärung" className="bold display3" textWrap="true" />
+                <Label text="Personenbezogene Daten" className="bold" textWrap="true" />
+                <Label text="Personenbezogene Daten sind Einzelangaben über persönliche oder sachliche Verhältnisse einer bestimmten oder bestimmbaren natürlichen Person. Darunter fallen Informationen wie z.B. Ihr Name, Ihre Anschrift, Ihre Telefonnummer und Ihr Geburtsdatum. Informationen, die nicht direkt mit Ihrer wirklichen Identität in Verbindung gebracht werden – wie z.B. favorisierte Webseiten oder Anzahl der Nutzer einer Seite – sind keine personenbezogenen Daten." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Erhebung und Verarbeitung von personenbezogenen Daten" className="bold" textWrap="true" />
+                <Label text="Wenn Sie unsere Webseiten besuchen, speichern unsere Webserver standardmäßig zum Zweck der Systemsicherheit temporär die Verbindungsdaten des anfragenden Rechners, die Webseiten, die Sie bei uns besuchen, das Datum und die Dauer des Besuches, die Erkennungsdaten des verwendeten Browser- und Betriebssystem-Typs sowie die Webseite, von der aus Sie uns besuchen. Darüber hinausgehende personenbezogene Angaben wie Ihr Name, Ihre Anschrift, Telefonnummer oder E-Mail-Adresse werden nicht erfasst, es sei denn, diese Angaben werden von Ihnen freiwillig gemacht, z.B. im Rahmen einer Newsletter-Registrierung oder einer Informationsanfrage." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Nutzung und Weitergabe der personenbezogenen Daten" className="bold" textWrap="true" />
+                <Label text="Die von Ihnen zur Verfügung gestellten personenbezogenen Daten verwenden wir ausschließlich zum Zweck der Erfüllung Ihrer Wünsche und Anforderungen, also in der Regel zur Beantwortung Ihrer Anfrage oder zur Zusendung unseres Newsletters. Eine Weitergabe, Verkauf oder sonstige Übermittlung Ihrer personenbezogenen Daten an Dritte erfolgt nicht, es sei denn, dass dies zum Zwecke der Vertragsabwicklung erforderlich ist oder Sie ausdrücklich eingewilligt haben." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Einsatz von Cookies" className="bold" textWrap="true" />
+                <Label text="“Cookies” sind kleine Dateien, die es uns ermöglichen auf Ihrem PC spezifische, auf Sie, den Nutzer, bezogene Informationen zu speichern, während Sie eine unserer Web-Sites besuchen. Cookies helfen uns dabei, die Nutzungshäufigkeit und die Anzahl der Nutzer unserer Internetseiten zu ermitteln, sowie unsere Angebote für Sie möglichst komfortabel und effizient zu gestalten. Der Inhalt der von uns verwendeten Cookies beschränkt sich auf eine Identifikationsnummer, die keine Personenbeziehbarkeit mehr auf den Nutzer zulässt." textWrap="true" />
+                <Label text="Eine Nutzung unserer Angebote ist auch ohne Cookies möglich. Sie können in Ihrem Browser das Speichern von Cookies deaktivieren, auf bestimmte Websites beschränken oder Ihren Browser so einstellen, dass er sie benachrichtigt, sobald ein Cookie gesendet wird. Sie können Cookies auch jederzeit von der Festplatte ihres PCs löschen. Bitte beachten Sie aber, dass Sie in diesem Fall mit einer eingeschränkten Darstellung der Seite und mit einer eingeschränkten Benutzerführung rechnen müssen." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Retargeting Technologien" className="bold" textWrap="true" />
+                <Label text="Diese Website verwendet sogenannte Retargeting-Technologien. Wir nutzen diese Technologien, um für Sie das Internetangebot interessanter zu gestalten. Diese Technik ermöglicht es, Internetnutzer, die sich bereits für unsere Produkte und Dienstleistungen interessiert haben, auf den Websites unserer Partner mit Werbung anzusprechen. Wir sind davon überzeugt, dass die Einblendung einer personalisierten, interessenbezogenen Werbung in der Regel für den Internetnutzer interessanter ist als Werbung, die keinen solchen persönlichen Bezug hat. Die Einblendung dieser Werbemittel auf den Seiten unserer Partner erfolgt auf Basis einer Cookie-Technologie und einer Analyse des vorherigen Nutzungsverhaltens. Diese Form der Werbung erfolgt vollkommen anonym. Es werden keine personenbezogenen Daten gespeichert und es werden auch keine Nutzungsprofile mit Ihren personenbezogenen Daten zusammengeführt." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Einsatz von Google Analytics" className="bold" textWrap="true" />
+                <Label text="Diese Website benutzt Google Analytics, einen Webanalysedienst der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, Textdateien, die auf Ihrem Computer gespeichert werden und die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch den Cookie erzeugten Informationen über Ihre Benutzung dieser Website (einschließlich Ihrer IP-Adresse) werden an einen Server von Google in den USA übertragen und dort gespeichert." textWrap="true" />
+                <Label text="Wir weisen darauf hin, dass auf dieser Webseite Google Analytics um den Code „gat._anonymizeIp();“ erweitert wurde, um eine anonymisierte Erfassung von IP-Adressen (sog. IP-Masking) zu gewährleisten." textWrap="true" />
+                <Label text="Ihre IP-Adresse wird daher auf unsere Veranlassung hin von Google lediglich in gekürzter Form erfasst, was eine Anonymisierung gewährleistet und keine Rückschlüsse auf Ihre Identität zulässt. Im Falle der Aktivierung der IP-Anonymisierung auf dieser Webseite, wird Ihre IP-Adresse von Google innerhalb von Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum zuvor gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in den USA übertragen und dort gekürzt. Google beachtet weiter die Datenschutzbestimmungen des “US-Safe-Harbor”-Abkommens und ist beim “Safe Harbor”-Programm des US-Handelsministeriums registriert. Google wird die genannten Informationen verwenden, um Ihre Nutzung unserer Webseite auszuwerten, um Reports über die Webseitenaktivitäten für uns zusammenzustellen und um weitere mit der Nutzung von Webseite und Internet verbundene Dienstleistungen an uns zu erbringen. Die im Rahmen von Google Analytics von Ihrem Browser übermittelte IP-Adresse wird nicht mit anderen Daten von Google zusammengeführt. Eine Übertragung dieser Daten durch Google an Dritte findet nur aufgrund gesetzlicher Vorschriften oder im Rahmen der Auftragsdatenverarbeitung statt. Keinesfalls wird Google ihre Daten mit anderen von Google erfassten Daten zusammenbringen." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Durch die Nutzung dieser Webseite erklären Sie sich mit der Bearbeitung der über Sie erhobenen Daten durch Google und der zuvor beschriebenen Art und Weise der Datenverarbeitung sowie dem benannten Zweck einverstanden." textWrap="true" />
+                <Label text="Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich werden nutzen können. Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem sie das unter dem folgenden Link (http://tools.google.com/dlpage/gaoptout?hl=de) verfügbare Browser-Plugin herunterladen und installieren." textWrap="true" />
+                <Label text="Nähere Informationen zu Google Analytics und Datenschutz finden Sie unter tools.google.com/dlpage/gaoptout bzw. unter www.google.com/intl/de/analytics/privacyoverview.html." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Sicherheit" className="bold" textWrap="true" />
+                <Label text="Wir treffen alle notwendigen technischen und organisatorischen Sicherheitsmaßnahmen, um Ihre personenbezogenen Daten vor Verlust und Missbrauch zu schützen. So werden Ihre Daten in einer sicheren Betriebsumgebung gespeichert, die der Öffentlichkeit nicht zugänglich ist. In bestimmten Fällen werden Ihre personenbezogenen Daten bei der Übermittlung durch die sog. Secure Socket Layer-Technologie (SSL) verschlüsselt. Das bedeutet, dass die Kommunikation zwischen Ihrem Computer und unseren Servern unter Einsatz eines anerkannten Verschlüsselungsverfahrens erfolgt, wenn Ihr Browser SSL unterstützt. Sollten Sie mit uns per E-Mail in Kontakt treten wollen, weisen wir darauf hin, dass die Vertraulichkeit der übermittelten Informationen nicht gewährleistet ist. Der Inhalt von E-Mails kann von Dritten eingesehen werden. Wir empfehlen Ihnen daher, uns vertrauliche Informationen verschlüsselt zukommen zu lassen." textWrap="true" />
+              </StackLayout>
+              <StackLayout>
+                <Label text="Änderung dieser Datenschutzerklärung" className="bold" textWrap="true" />
+                <Label text="Da diese Hinweise der jeweils aktuellen Rechtslage unterliegen, behalten wir uns vor, diese Datenschutzerklärung künftig entsprechend zu ändern. Wir empfehlen Ihnen, diese Datenschutzbestimmungen regelmäßig zu lesen, um über den Schutz der von uns erfassten Daten auf dem Laufenden zu bleiben. Durch die fortgesetzte Nutzung dieser Websites bzw. durch eine aufrechte Geschäftsbeziehung erklären Sie sich mit diesen Datenschutzbestimmungen und deren Aktualität einverstanden." textWrap="true" />
+              </StackLayout>
+            </StackLayout>
+          </ScrollView>
+        </GridLayout>
+      </GridLayout>
+    </drawer:RadSideDrawer.mainContent>
+  </drawer:RadSideDrawer>
+</Page>

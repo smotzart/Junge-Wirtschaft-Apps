@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "nativescript-cardview": "2.0.2",
+    "nativescript-theme-core": "1.0.4",
+    "moment": "2.18.1",
+    "nativescript-telerik-ui": "3.1.0-2017.9.5.5",
+    "nativescript-sqlite": "1.1.9",
+    "nativescript-google-analytics": "0.3.7",
+    "nativescript-web-image-cache": "4.2.2",
+    "tns-core-modules": "next",
+    "tns-ios": "next",
+    "tns-android": "next",
+    "nativescript-email": "1.5.1"
+  },
+  "devDependencies": {}
+}
